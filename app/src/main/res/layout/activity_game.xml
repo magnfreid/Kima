@@ -2,24 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".GameActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1.7"
         android:background="@color/black"
-        android:orientation="horizontal"
-        android:layout_weight="1.7">
-    </LinearLayout>
+        android:orientation="horizontal"></LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="#1DE9B6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="#1DE9B6" />
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -28,11 +27,23 @@
         android:layout_weight="1"
         tools:layout="@layout/fragment_hand_of_cards" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1.7"
         android:background="@color/black"
-        android:orientation="horizontal"
-        android:layout_weight="1.7">
-    </LinearLayout>
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+           />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+          />
+    </FrameLayout>
 </LinearLayout>
