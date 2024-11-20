@@ -16,7 +16,7 @@
         android:layout_weight="1.7"
         android:background="@color/black"
         android:orientation="horizontal"
-        android:layout_weight="1.7"
+
         >
 
         <com.google.android.material.button.MaterialButton
@@ -51,6 +51,7 @@
         >
 
         <ImageView
+            android:id="@+id/present_computer_card"
             android:layout_width="100dp"
             android:layout_height="140dp"
             android:background="#1DE9B6"
@@ -85,7 +86,7 @@
         android:layout_weight="1.7"
         android:background="@color/black"
         android:orientation="horizontal"
-        android:layout_weight="1.7"
+
         >
 
         <com.google.android.material.button.MaterialButton
