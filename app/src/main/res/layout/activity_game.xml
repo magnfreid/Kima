@@ -50,6 +50,7 @@
         >
 
         <ImageView
+            android:id="@+id/present_computer_card"
             android:layout_width="100dp"
             android:layout_height="140dp"
             android:background="#1DE9B6"
