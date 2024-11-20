@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentManager
 import com.example.kima.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,8 +22,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         binding.btnStart.setOnClickListener{
-            val intent = Intent()
+            val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
+        }
+        binding.btnRules.setOnClickListener{
+            val dialogFragment = RulesDialogFragment()
+            dialogFragment.show(supportFragmentManager, "Test")
         }
     }
 }
