@@ -1,4 +1,4 @@
-package com.example.kima
+package com.example.kima.models
 
 
 

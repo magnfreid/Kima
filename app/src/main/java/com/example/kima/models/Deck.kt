@@ -1,4 +1,6 @@
-package com.example.kima
+package com.example.kima.models
+
+import com.example.kima.R
 
 class Deck {
 

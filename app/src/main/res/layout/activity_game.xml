@@ -68,9 +68,9 @@
         android:layout_weight="1">
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_player"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             tools:layout="@layout/fragment_hand_of_cards" />
 
 
