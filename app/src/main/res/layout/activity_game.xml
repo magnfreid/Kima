@@ -16,7 +16,6 @@
         android:layout_weight="1.7"
         android:background="@color/black"
         android:orientation="horizontal"
-
         >
 
         <com.google.android.material.button.MaterialButton
@@ -86,7 +85,6 @@
         android:layout_weight="1.7"
         android:background="@color/black"
         android:orientation="horizontal"
-
         >
 
         <com.google.android.material.button.MaterialButton
