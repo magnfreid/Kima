@@ -51,8 +51,7 @@
 
         <ImageView
             android:id="@+id/present_computer_card"
-            android:layout_width="100dp"
-            android:layout_height="140dp"
+            style="@style/IVCardStyle"
             android:background="#1DE9B6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

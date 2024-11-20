@@ -1,16 +1,16 @@
 package com.example.kima
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.kima.controllers.HandAdapter
 import com.example.kima.databinding.FragmentHandOfCardsBinding
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.kima.models.Card
 
 /**
  * A simple [Fragment] subclass.
@@ -18,47 +18,27 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class HandOfCardsFragment : Fragment() {
-    lateinit var binding: FragmentHandOfCardsBinding
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
-
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHandOfCardsBinding.inflate(inflater)
-        // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_hand_of_cards, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HandOfCardsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HandOfCardsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_hand)
+        recyclerView.adapter = HandAdapter(testList)
+      recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
     }
+
+    private val testList = mutableListOf(
+        Card("diamonds", 3, R.drawable.diamonds_3, "diamonds_3"),
+        (Card("diamonds", 4, R.drawable.diamonds_4, "diamonds_4")),
+        (Card("diamonds", 5, R.drawable.diamonds_5, "diamonds_5")),
+        (Card("diamonds", 6, R.drawable.diamonds_6, "diamonds_6")),
+        (Card("diamonds", 7, R.drawable.diamonds_7, "diamonds_7"))
+    )
+
 }

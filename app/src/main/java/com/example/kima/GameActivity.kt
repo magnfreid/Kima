@@ -37,6 +37,7 @@ class GameActivity : AppCompatActivity() {
         ivPresentComputerCard.setImageResource(idFromCard)
         showHandFragment()
 
+
     }
 
     fun randomiseCard(): Int {
