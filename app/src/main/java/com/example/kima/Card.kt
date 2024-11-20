@@ -2,7 +2,7 @@ package com.example.kima
 
 
 
-class Card(suit: String, rank: Int, id: Int)  {
+class Card(val suit: String, val rank: Int, val id: Int, val imageName: String)  {
 
 
 
