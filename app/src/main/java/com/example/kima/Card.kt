@@ -1,4 +1,10 @@
 package com.example.kima
 
-class Card {
+
+
+class Card(suit: String, rank: Int, id: Int)  {
+
+
+
+
 }

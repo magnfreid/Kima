@@ -9,6 +9,10 @@ import com.example.kima.databinding.ActivityGameBinding
 
 class GameActivity : AppCompatActivity() {
     lateinit var binding : ActivityGameBinding
+    val deck : MutableList<Card> = Deck().generateDeck()
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
