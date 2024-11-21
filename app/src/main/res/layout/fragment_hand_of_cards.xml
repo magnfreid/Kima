@@ -39,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062"
+        app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -51,7 +51,7 @@
         app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062"
+        app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062"
+        app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -74,7 +74,7 @@
         app:layout_constraintHorizontal_bias="0.643"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062"
+        app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -86,7 +86,7 @@
         app:layout_constraintHorizontal_bias="0.808"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062"
+        app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
 
 
