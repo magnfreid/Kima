@@ -39,9 +39,10 @@ class GameViewModel : ViewModel(), GameLogics {
         rulesModule.resolveTurn()
     }
 
-    /*fun drawFullHand(hand: MutableList<Card>) {
-        deck.drawFullHand(hand)
-    }*/
+    fun randomiseComputerCard() : Card {
+        return deckManager.randomiseComputerCard()
+    }
+
 
 }
 

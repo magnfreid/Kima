@@ -17,7 +17,7 @@ class DeckManager {
     private val _computerCard = MutableLiveData<Card>()
     val computerCard: LiveData<Card> get() = _computerCard
 
-    private var _userCard = MutableLiveData<Card>()
+    private val _userCard = MutableLiveData<Card>()
     val userCard: LiveData<Card> get() = _userCard
 
 
@@ -28,6 +28,16 @@ class DeckManager {
         _computerHand.value = drawFullHand(computerHand.value ?: mutableListOf())
     }
 
+
+    fun randomiseComputerCard() : Card {
+        val currentComputerHand = _computerHand.value ?: mutableListOf()
+        val randomIndex = (1 until currentComputerHand.size).random()
+        val randomCard = currentComputerHand[randomIndex]
+        currentComputerHand.removeAt(randomIndex)
+        _computerHand.value = currentComputerHand
+        _computerCard.value = randomCard
+        return randomCard
+    }
 
     private fun randomiseCard(deck : MutableList<Card>) : Int {
         return (0 until deck.size).random()
