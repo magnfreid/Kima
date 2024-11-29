@@ -30,8 +30,9 @@ class GameViewModel : ViewModel() {
         deckManager.updateUserCard(card)
     }
 
-    /*fun drawFullHand(hand: MutableList<Card>) {
-        deck.drawFullHand(hand)
-    }*/
+    fun randomiseComputerCard() : Card {
+        return deckManager.randomiseComputerCard()
+    }
+
 
 }

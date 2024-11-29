@@ -62,17 +62,7 @@ class HandOfCardsFragment(
                 Log.d("SOUT", "$vm HOC FRAGMENT")
                 onShowPlayedHand()
             }
-
-
-
-
         }
-
-
-//        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_hand)
-//        recyclerView.adapter = HandAdapter(testList)
-//      recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
     }
 
     private fun setUpImageViewsForUserHand(view: View) {
@@ -109,6 +99,4 @@ class HandOfCardsFragment(
         }
 
     }
-
-
 }
