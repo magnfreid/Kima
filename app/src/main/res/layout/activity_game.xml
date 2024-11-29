@@ -61,9 +61,13 @@
 
 
 <!--  Container med fragment  -->
+
+
+    <!--  Bar med knapp för visa handen och visa spelarenspoäng  -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
         <androidx.fragment.app.FragmentContainerView
@@ -74,9 +78,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-<!--  Bar med knapp för visa handen och visa spelarenspoäng  -->
 
     <FrameLayout
         android:layout_width="match_parent"
