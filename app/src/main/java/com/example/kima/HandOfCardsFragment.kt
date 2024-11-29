@@ -1,6 +1,7 @@
 package com.example.kima
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,7 +48,9 @@ class HandOfCardsFragment(
         }
 
         binding.btnPlaceCard.setOnClickListener {
-                for (card in userHand) {
+            Log.d("SOUT", "${vm.userCard.value} BEFORE")
+
+            for (card in userHand) {
                     if (card.isRaised) {
                         chosenCard = card
                         break
@@ -55,8 +58,11 @@ class HandOfCardsFragment(
                 }
             if(chosenCard != null) {
                 vm.updatePlayerCard(chosenCard!!)
+                Log.d("SOUT", "${vm.userCard.value} AFTER")
+                Log.d("SOUT", "$vm HOC FRAGMENT")
                 onShowPlayedHand()
             }
+
 
 
 

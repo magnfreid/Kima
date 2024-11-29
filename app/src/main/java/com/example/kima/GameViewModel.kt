@@ -19,12 +19,12 @@ class GameViewModel : ViewModel() {
     val userHand: LiveData<MutableList<Card>> get() = deckManager.userHand
 
     // LiveData for computer's played card
-    private val _userCard = MutableLiveData<Card>()
-    val userCard: LiveData<Card> get() = _userCard
+
+    val userCard: LiveData<Card> get() = deckManager.userCard
 
     // LiveData for computer's played card
-    private val _computerCard = MutableLiveData<Card>()
-    val computerCard: LiveData<Card> get() = _computerCard
+
+    val computerCard: LiveData<Card> get() = deckManager.computerCard
 
     fun updatePlayerCard(card: Card) {
         deckManager.updateUserCard(card)

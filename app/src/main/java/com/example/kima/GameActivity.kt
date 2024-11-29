@@ -1,6 +1,7 @@
 package com.example.kima
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,7 +17,9 @@ class GameActivity : AppCompatActivity() {
     lateinit var vm : GameViewModel
 val playedCardFragment: Fragment = PlayedCardFragment()
     val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
+        //TODO visa även motspelarens kort här
         showFragment(playedCardFragment)
+        Log.d("SOUT", "${vm.userCard.value}")
     }
 
 //    lateinit var ivPresentComputerCard: ImageView

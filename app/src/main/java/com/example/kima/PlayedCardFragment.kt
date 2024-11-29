@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.kima.databinding.FragmentPlayedCardBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -16,17 +17,25 @@ import com.example.kima.databinding.FragmentPlayedCardBinding
  * Use the [PlayedCardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PlayedCardFragment: Fragment() {
+class PlayedCardFragment : Fragment() {
     private lateinit var binding: FragmentPlayedCardBinding
-
+    lateinit var vm: GameViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        vm = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         binding = FragmentPlayedCardBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        vm.userCard.observe(viewLifecycleOwner) {
+            binding.ivPlayedCard.setImageResource(it.id)
+        }
+
     }
 
 
