@@ -1,15 +1,12 @@
 package com.example.kima
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kima.controllers.HandAdapter
+import androidx.lifecycle.ViewModelProvider
 import com.example.kima.databinding.FragmentHandOfCardsBinding
 import com.example.kima.models.Card
 
@@ -20,21 +17,22 @@ import com.example.kima.models.Card
  */
 class HandOfCardsFragment : Fragment() {
     val userHandView : MutableList<ImageView> = mutableListOf()
+    lateinit var binding: FragmentHandOfCardsBinding
+    lateinit var vm: GameViewModel
+    var userHand = mutableListOf<Card>()
 
-    fun displayUserHand(userHandView: MutableList<ImageView>, userHand : MutableList<Card>) {
-        for(i in  0..userHand.size-1) {
-            val cardName = userHand[i].imageName
-            val imageResId = resources.getIdentifier(cardName, "drawable", requireContext().packageName)
-            userHandView[i].setImageResource(imageResId)
-        }
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_hand_of_cards, container, false)
+
+        binding = FragmentHandOfCardsBinding.inflate(inflater, container, false)
+
+        vm = ViewModelProvider(requireActivity()).get(GameViewModel::class.java)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +41,23 @@ class HandOfCardsFragment : Fragment() {
 
 
 
+        vm.userHand.observe(viewLifecycleOwner) {
+            userHand = it
+            setUpImageViewsForUserHand(view)
+            displayUserHand(userHandView, userHand)
+        }
 
+
+
+
+
+//        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_hand)
+//        recyclerView.adapter = HandAdapter(testList)
+//      recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+    }
+
+    private fun setUpImageViewsForUserHand(view: View) {
         val ivUserCard1 = view.findViewById<ImageView>(R.id.iv_user_card_1)
         val ivUserCard2 = view.findViewById<ImageView>(R.id.iv_user_card_2)
         val ivUserCard3 = view.findViewById<ImageView>(R.id.iv_user_card_3)
@@ -56,19 +70,18 @@ class HandOfCardsFragment : Fragment() {
         userHandView.add(ivUserCard4)
         userHandView.add(ivUserCard5)
 
-        val userHand = arguments?.getParcelableArrayList<Card>("userHand") as? MutableList<Card> ?: mutableListOf()
-        displayUserHand(userHandView, userHand)
 
-        for(imageView in userHandView) {
+        for (imageView in userHandView) {
             imageView.setOnClickListener {
-                imageView.animate().translationY(-50f).setDuration(150)
+                if(userHand[userHandView.indexOf(imageView)].isRaised) {
+                    imageView.animate().translationY(0f).setDuration(150)
+                    userHand[userHandView.indexOf(imageView)].isRaised = false
+                } else {
+                    imageView.animate().translationY(-50f).setDuration(150)
+                    userHand[userHandView.indexOf(imageView)].isRaised = true
+                }
             }
         }
-
-//        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_hand)
-//        recyclerView.adapter = HandAdapter(testList)
-//      recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
     }
 
     /*private val testList = mutableListOf(
@@ -78,5 +91,14 @@ class HandOfCardsFragment : Fragment() {
         (Card("diamonds", 6, R.drawable.diamonds_6, "diamonds_6")),
         (Card("diamonds", 7, R.drawable.diamonds_7, "diamonds_7"))
     )*/
+
+    fun displayUserHand(userHandView: MutableList<ImageView>, userHand : MutableList<Card>) {
+        for(i in  0..userHand.size-1) {
+            val card = userHand[i]
+            userHandView[i].setImageResource(card.id)
+        }
+
+    }
+
 
 }
