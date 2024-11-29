@@ -17,7 +17,7 @@ class DeckManager {
     private val _computerCard = MutableLiveData<Card>()
     val computerCard: LiveData<Card> get() = _computerCard
 
-    private val _userCard = MutableLiveData<Card>()
+    private var _userCard = MutableLiveData<Card>()
     val userCard: LiveData<Card> get() = _userCard
 
 
@@ -27,12 +27,6 @@ class DeckManager {
         _userHand.value = drawFullHand(userHand.value ?: mutableListOf())
         _computerHand.value = drawFullHand(computerHand.value ?: mutableListOf())
     }
-
-    fun updateUserCard(card: Card) {
-        _userCard.value = card
-    }
-
-
 
 
     private fun randomiseCard(deck : MutableList<Card>) : Int {
@@ -56,7 +50,9 @@ class DeckManager {
         return hand
     }
 
-
+fun updatePlayerCard(card: Card){
+    _userCard.value = card
+}
 
 
     fun generateDeck() : MutableList<Card> {

@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.example.kima.models.Card
 import com.example.kima.models.DeckManager
 
-class GameViewModel : ViewModel() {
+class GameViewModel : ViewModel(), GameLogics {
 
-    val deckManager = DeckManager()
-
+    private val deckManager = DeckManager()
+    private val rulesModule: GameLogics = RulesModule(this)
 
     // LiveData for score
     private val _score = MutableLiveData<Int>()
@@ -27,11 +27,25 @@ class GameViewModel : ViewModel() {
     val computerCard: LiveData<Card> get() = deckManager.computerCard
 
     fun updatePlayerCard(card: Card) {
-        deckManager.updateUserCard(card)
+        deckManager.updatePlayerCard(card)
+
+    }
+
+    override fun checkWinner() {
+        rulesModule.checkWinner()
+    }
+
+    override fun resolveTurn() {
+        rulesModule.resolveTurn()
     }
 
     /*fun drawFullHand(hand: MutableList<Card>) {
         deck.drawFullHand(hand)
     }*/
 
+}
+
+interface GameLogics {
+    fun checkWinner()
+    fun resolveTurn()
 }
