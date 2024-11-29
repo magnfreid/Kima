@@ -18,17 +18,19 @@ class GameActivity : AppCompatActivity() {
 val playedCardFragment: Fragment = PlayedCardFragment()
     val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         //TODO visa även motspelarens kort här
+
         showFragment(playedCardFragment)
+
+        val computerCard: Card?
+        computerCard = displayComputerCard()
+        binding.presentComputerCard.setImageResource(computerCard.id)
+
+
         Log.d("SOUT", "${vm.userCard.value}")
     }
 
-//    lateinit var ivPresentComputerCard: ImageView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-//        drawFullHand(userHand)
-//        drawFullHand(computerHand)
 
         super.onCreate(savedInstanceState)
 
@@ -45,20 +47,15 @@ val playedCardFragment: Fragment = PlayedCardFragment()
             insets
         }
 
-
-
         showFragment(handOfCardsFragment)
 
-        /*ivPresentComputerCard = findViewById(R.id.present_computer_card)
-
-        val randomIndex = randomiseCard(deck)
-        val randomCard = deck[randomIndex]
-        val nameFromCard = randomCard.imageName
-        val idFromCard = resources.getIdentifier(nameFromCard, "drawable", packageName)
-        ivPresentComputerCard.setImageResource(idFromCard)
-        showHandFragment()*/
 
 
+        vm.computerCard.observe(this) {
+            if(it != null) {
+//                binding.presentComputerCard.setImageResource(computerCard!!.id)
+            }
+        }
     }
 
 
@@ -68,5 +65,11 @@ val playedCardFragment: Fragment = PlayedCardFragment()
             replace(binding.fcvPlayer.id, fragment)
             commit()
         }
+    }
+
+    private fun displayComputerCard() : Card {
+        val card = vm.randomiseComputerCard()
+        return card
+
     }
 }

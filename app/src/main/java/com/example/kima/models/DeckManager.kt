@@ -32,8 +32,15 @@ class DeckManager {
         _userCard.value = card
     }
 
-
-
+    fun randomiseComputerCard() : Card {
+        val currentComputerHand = _computerHand.value ?: mutableListOf()
+        val randomIndex = (1 until currentComputerHand.size).random()
+        val randomCard = currentComputerHand[randomIndex]
+        currentComputerHand.removeAt(randomIndex)
+        _computerHand.value = currentComputerHand
+        _computerCard.value = randomCard
+        return randomCard
+    }
 
     private fun randomiseCard(deck : MutableList<Card>) : Int {
         return (0 until deck.size).random()

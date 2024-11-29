@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00B0FF"
+    android:background="#8A5466"
     tools:context=".HandOfCardsFragment">
 
 <!--    <androidx.recyclerview.widget.RecyclerView
@@ -26,6 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:textColor="#562435"
+        android:textSize="20sp"
         android:text="@string/btn_place_card_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
