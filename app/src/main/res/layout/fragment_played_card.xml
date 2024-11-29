@@ -4,14 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayedCardFragment"
-    android:background="#F50057">
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:text="PLAYED CARD" />
+    <ImageView
+        android:id="@+id/iv_played_card"
+        style="@style/IVCardStyle"
+        android:layout_gravity="center"/>
 
 </FrameLayout>

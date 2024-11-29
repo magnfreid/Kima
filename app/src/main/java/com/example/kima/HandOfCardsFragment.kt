@@ -1,6 +1,7 @@
 package com.example.kima
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,14 @@ import com.example.kima.models.Card
  * Use the [HandOfCardsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HandOfCardsFragment : Fragment() {
-    val userHandView : MutableList<ImageView> = mutableListOf()
+class HandOfCardsFragment(
+    val onShowPlayedHand: () -> Unit
+) : Fragment() {
+    val userHandView: MutableList<ImageView> = mutableListOf()
     lateinit var binding: FragmentHandOfCardsBinding
     lateinit var vm: GameViewModel
     var userHand = mutableListOf<Card>()
-
+    var chosenCard: Card? = null
 
 
     override fun onCreateView(
@@ -38,17 +41,32 @@ class HandOfCardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         vm.userHand.observe(viewLifecycleOwner) {
             userHand = it
             setUpImageViewsForUserHand(view)
             displayUserHand(userHandView, userHand)
         }
 
+        binding.btnPlaceCard.setOnClickListener {
+            Log.d("SOUT", "${vm.userCard.value} BEFORE")
+
+            for (card in userHand) {
+                    if (card.isRaised) {
+                        chosenCard = card
+                        break
+                    }
+                }
+            if(chosenCard != null) {
+                vm.updatePlayerCard(chosenCard!!)
+                Log.d("SOUT", "${vm.userCard.value} AFTER")
+                Log.d("SOUT", "$vm HOC FRAGMENT")
+                onShowPlayedHand()
+            }
 
 
+
+
+        }
 
 
 //        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_hand)
@@ -73,7 +91,7 @@ class HandOfCardsFragment : Fragment() {
 
         for (imageView in userHandView) {
             imageView.setOnClickListener {
-                if(userHand[userHandView.indexOf(imageView)].isRaised) {
+                if (userHand[userHandView.indexOf(imageView)].isRaised) {
                     imageView.animate().translationY(0f).setDuration(150)
                     userHand[userHandView.indexOf(imageView)].isRaised = false
                 } else {
@@ -84,16 +102,8 @@ class HandOfCardsFragment : Fragment() {
         }
     }
 
-    /*private val testList = mutableListOf(
-        Card("diamonds", 3, R.drawable.diamonds_3, "diamonds_3"),
-        (Card("diamonds", 4, R.drawable.diamonds_4, "diamonds_4")),
-        (Card("diamonds", 5, R.drawable.diamonds_5, "diamonds_5")),
-        (Card("diamonds", 6, R.drawable.diamonds_6, "diamonds_6")),
-        (Card("diamonds", 7, R.drawable.diamonds_7, "diamonds_7"))
-    )*/
-
-    fun displayUserHand(userHandView: MutableList<ImageView>, userHand : MutableList<Card>) {
-        for(i in  0..userHand.size-1) {
+    fun displayUserHand(userHandView: MutableList<ImageView>, userHand: MutableList<Card>) {
+        for (i in 0..userHand.size - 1) {
             val card = userHand[i]
             userHandView[i].setImageResource(card.id)
         }

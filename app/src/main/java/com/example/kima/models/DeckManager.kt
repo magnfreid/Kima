@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.kima.R
 
-class Deck {
+class DeckManager {
 
     val deck: MutableList<Card> = generateDeck()
 
@@ -14,10 +14,22 @@ class Deck {
     private val _computerHand = MutableLiveData<MutableList<Card>>()
     val computerHand: LiveData<MutableList<Card>> get() = _computerHand
 
+    private val _computerCard = MutableLiveData<Card>()
+    val computerCard: LiveData<Card> get() = _computerCard
+
+    private val _userCard = MutableLiveData<Card>()
+    val userCard: LiveData<Card> get() = _userCard
+
+
+
 
     init {
         _userHand.value = drawFullHand(userHand.value ?: mutableListOf())
         _computerHand.value = drawFullHand(computerHand.value ?: mutableListOf())
+    }
+
+    fun updateUserCard(card: Card) {
+        _userCard.value = card
     }
 
 

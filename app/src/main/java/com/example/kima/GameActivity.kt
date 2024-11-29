@@ -1,22 +1,26 @@
 package com.example.kima
 
 import android.os.Bundle
-import android.widget.ImageView
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kima.databinding.ActivityGameBinding
 import com.example.kima.models.Card
-import com.example.kima.models.Deck
+import com.example.kima.models.DeckManager
 
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
-    val deck: MutableList<Card> = Deck().generateDeck()
-    val userHand : MutableList<Card> = mutableListOf()
-    val computerHand : MutableList<Card> = mutableListOf()
     lateinit var vm : GameViewModel
+val playedCardFragment: Fragment = PlayedCardFragment()
+    val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
+        //TODO visa även motspelarens kort här
+        showFragment(playedCardFragment)
+        Log.d("SOUT", "${vm.userCard.value}")
+    }
 
 //    lateinit var ivPresentComputerCard: ImageView
 
@@ -43,7 +47,7 @@ class GameActivity : AppCompatActivity() {
 
 
 
-        showHandFragment()
+        showFragment(handOfCardsFragment)
 
         /*ivPresentComputerCard = findViewById(R.id.present_computer_card)
 
@@ -59,8 +63,7 @@ class GameActivity : AppCompatActivity() {
 
 
 
-    private fun showHandFragment() {
-        val fragment = HandOfCardsFragment()
+    private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(binding.fcvPlayer.id, fragment)
             commit()

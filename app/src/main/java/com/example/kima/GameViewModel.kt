@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kima.models.Card
-import com.example.kima.models.Deck
+import com.example.kima.models.DeckManager
 
 class GameViewModel : ViewModel() {
 
-    val deck = Deck()
+    val deckManager = DeckManager()
 
 
     // LiveData for score
@@ -16,16 +16,19 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int> get() = _score
 
     // LiveData for user's hand
-    val userHand: LiveData<MutableList<Card>> get() = deck.userHand
+    val userHand: LiveData<MutableList<Card>> get() = deckManager.userHand
 
     // LiveData for computer's played card
-    private val _userCard = MutableLiveData<Card>()
-    val userCard: LiveData<Card> get() = _userCard
+
+    val userCard: LiveData<Card> get() = deckManager.userCard
 
     // LiveData for computer's played card
-    private val _computerCard = MutableLiveData<Card>()
-    val computerCard: LiveData<Card> get() = _computerCard
 
+    val computerCard: LiveData<Card> get() = deckManager.computerCard
+
+    fun updatePlayerCard(card: Card) {
+        deckManager.updateUserCard(card)
+    }
 
     /*fun drawFullHand(hand: MutableList<Card>) {
         deck.drawFullHand(hand)
