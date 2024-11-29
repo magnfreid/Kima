@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.kima.databinding.ActivityGameBinding
 import com.example.kima.models.Card
 import com.example.kima.models.Deck
@@ -15,18 +16,20 @@ class GameActivity : AppCompatActivity() {
     val deck: MutableList<Card> = Deck().generateDeck()
     val userHand : MutableList<Card> = mutableListOf()
     val computerHand : MutableList<Card> = mutableListOf()
+    lateinit var vm : GameViewModel
 
 //    lateinit var ivPresentComputerCard: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        drawFullHand(userHand)
-        drawFullHand(computerHand)
+//        drawFullHand(userHand)
+//        drawFullHand(computerHand)
 
         super.onCreate(savedInstanceState)
 
         binding = ActivityGameBinding.inflate(layoutInflater)
+        vm = ViewModelProvider(this).get(GameViewModel::class.java)
 
         enableEdgeToEdge()
 
@@ -37,6 +40,8 @@ class GameActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
 
         showHandFragment()
 
@@ -52,30 +57,10 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun randomiseCard(deck : MutableList<Card>) : Int {
-        return (0 until deck.size).random()
-    }
 
-    private fun drawCardUser(deck: MutableList<Card>, hand: MutableList<Card>) {
-        val randomIndex = randomiseCard(deck)
-        val randomCard = deck[randomIndex]
-        deck.removeAt(randomIndex)
-        hand.add(randomCard)
-    }
-
-
-
-    private fun drawFullHand(hand: MutableList<Card>) {
-        for(i in 1..5) {
-            drawCardUser(deck, hand)
-        }
-    }
 
     private fun showHandFragment() {
-        val bundle = Bundle()
-        bundle.putParcelableArrayList("userHand", ArrayList(userHand))
         val fragment = HandOfCardsFragment()
-        fragment.arguments = bundle
         supportFragmentManager.beginTransaction().apply {
             replace(binding.fcvPlayer.id, fragment)
             commit()
