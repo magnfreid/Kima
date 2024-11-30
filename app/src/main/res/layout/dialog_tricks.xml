@@ -18,6 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_marginTop="20dp"
             android:textSize="30sp"
             android:textColor="@color/white"
@@ -35,10 +37,5 @@
            />
 
     </LinearLayout>
-
-
-
-
-
 
 </androidx.cardview.widget.CardView>
