@@ -28,9 +28,6 @@ class DeckManager {
         _computerHand.value = drawFullHand(computerHand.value ?: mutableListOf())
     }
 
-    fun updateUserCard(card: Card) {
-        _userCard.value = card
-    }
 
     fun randomiseComputerCard() : Card {
         val currentComputerHand = _computerHand.value ?: mutableListOf()
@@ -63,7 +60,9 @@ class DeckManager {
         return hand
     }
 
-
+fun updatePlayerCard(card: Card){
+    _userCard.value = card
+}
 
 
     fun generateDeck() : MutableList<Card> {
