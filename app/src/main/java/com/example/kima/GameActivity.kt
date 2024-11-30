@@ -25,6 +25,9 @@ val playedCardFragment: Fragment = PlayedCardFragment()
         computerCard = displayComputerCard()
         binding.presentComputerCard.setImageResource(computerCard.id)
 
+        val trickDialogFragment = TrickDialogFragment()
+        trickDialogFragment.show(supportFragmentManager, "Trick")
+
 
         Log.d("SOUT", "${vm.userCard.value}")
     }
