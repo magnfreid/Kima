@@ -2,6 +2,8 @@ package com.example.kima
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,7 +18,8 @@ import com.example.kima.views.ScoreBoardDialogFragment
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
     lateinit var vm : GameViewModel
-val playedCardFragment: Fragment = PlayedCardFragment()
+
+    val playedCardFragment: Fragment = PlayedCardFragment()
     val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         //TODO visa även motspelarens kort här
 
@@ -38,8 +41,31 @@ val playedCardFragment: Fragment = PlayedCardFragment()
 
         super.onCreate(savedInstanceState)
 
+
+
         binding = ActivityGameBinding.inflate(layoutInflater)
         vm = ViewModelProvider(this).get(GameViewModel::class.java)
+
+        val menuItems = listOf("Rules", "Exit")
+        val menuAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, menuItems)
+        val autoCompleteTextView = binding.menu.editText as? AutoCompleteTextView
+        autoCompleteTextView?.setAdapter(menuAdapter)
+
+        autoCompleteTextView?.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = menuItems[position]
+            when (selectedItem) {
+                "Rules" -> {
+                    // Visa reglerna
+                    val dialogFragment = RulesDialogFragment()
+                    dialogFragment.show(supportFragmentManager, "Test")
+                }
+                "Exit" -> {
+                    // Avsluta spelet
+                    finish()
+
+                }
+            }
+        }
 
         enableEdgeToEdge()
 
