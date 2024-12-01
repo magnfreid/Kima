@@ -1,5 +1,6 @@
 package com.example.kima.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.kima.models.Card
@@ -43,10 +44,10 @@ class GameViewModel : ViewModel() {
     }
 
     fun checkWinner(): Player? {
-        return  gameRules.checkWinner()
+        return gameRules.checkWinner()
     }
 
-    fun resolveTurn(){
+    fun resolveTurn() {
         gameRules.resolveTurn()
     }
 
@@ -60,6 +61,7 @@ class GameViewModel : ViewModel() {
         val computerScore = computer.value?.score ?: 0
         val round = 6 - player.value?.hand!!.size
         scoreboard.addScoreboardRow(round, playerScore, computerScore)
+        Log.d("SOUT", "${scoreBoardCollection.value}")
     }
 
     fun randomiseComputerCard(): Card {

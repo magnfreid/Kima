@@ -12,14 +12,13 @@ class Scoreboard {
     val scoreBoardScoreCollection: LiveData<MutableList<ScoreboardRow>> get() = _scoreBoardScoreCollection
 
     data class ScoreboardRow(
-        val round: Int,
-        val playerScore: Int,
-        val cpuScore: Int
+        val round: Int, val playerScore: Int, val cpuScore: Int
     )
 
     fun addScoreboardRow(round: Int, playerScore: Int, computerScore: Int) {
-        val tempList = _scoreBoardScoreCollection.value
-        tempList?.add(ScoreboardRow(round, playerScore, computerScore))
-        _scoreBoardScoreCollection.value = tempList
+        _scoreBoardScoreCollection.value?.let {
+            it.add(ScoreboardRow(round, playerScore, computerScore))
+            _scoreBoardScoreCollection.value = it
+        }
     }
 }

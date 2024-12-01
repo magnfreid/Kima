@@ -1,6 +1,7 @@
 package com.example.kima.views
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.enableEdgeToEdge
@@ -18,8 +19,8 @@ import com.example.kima.models.Card
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
     lateinit var vm: GameViewModel
-    val playedCardFragment: Fragment = PlayedCardFragment()
-    val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
+    private val playedCardFragment: Fragment = PlayedCardFragment()
+    private val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         showFragment(playedCardFragment)
         val computerCard: Card?
         computerCard = displayComputerCard()
@@ -30,17 +31,31 @@ class GameActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         binding = ActivityGameBinding.inflate(layoutInflater)
         vm = ViewModelProvider(this)[GameViewModel::class.java]
+        enableEdgeToEdge()
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        vm.dealPlayerHand()
+        vm.dealComputerHand()
+        showFragment(handOfCardsFragment)
+        //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
+        binding.btnShowHand.setOnClickListener {
+            ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
+        }
+        setupMenu()
+    }
 
+    private fun setupMenu() {
         val menuItems = listOf("Rules", "Exit")
         val menuAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, menuItems)
         val autoCompleteTextView = binding.menu.editText as? AutoCompleteTextView
         autoCompleteTextView?.setAdapter(menuAdapter)
-
         autoCompleteTextView?.setOnItemClickListener { _, _, position, _ ->
             val selectedItem = menuItems[position]
             when (selectedItem) {
@@ -55,25 +70,6 @@ class GameActivity : AppCompatActivity() {
 
                 }
             }
-        }
-
-        enableEdgeToEdge()
-
-        setContentView(binding.root)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        vm.dealPlayerHand()
-        vm.dealComputerHand()
-
-        showFragment(handOfCardsFragment)
-
-        //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
-        binding.btnShowHand.setOnClickListener {
-            ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
         }
     }
 
