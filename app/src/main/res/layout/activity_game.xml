@@ -17,15 +17,31 @@
         android:background="@color/black"
         android:orientation="horizontal"
         >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/menu"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:hint="Menu"
+            app:boxBackgroundColor="@color/black">
 
-        <com.google.android.material.button.MaterialButton
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+       <!-- <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_menu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:backgroundTint="#420D0D"
             android:text="MENU"
-            android:textColor="#C3C3C3"/>
+            android:textColor="#C3C3C3"/>-->
 
         <TextView
             android:id="@+id/tv_point_counter_CPU"
@@ -39,6 +55,8 @@
             android:backgroundTint="#956E6E"
             />
     </FrameLayout>
+
+
 
 
 

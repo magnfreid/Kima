@@ -1,16 +1,19 @@
 package com.example.kima.views
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.kima.viewmodel.GameViewModel
 import com.example.kima.R
+import com.example.kima.viewmodel.GameViewModel
 import com.example.kima.databinding.ActivityGameBinding
 import com.example.kima.models.Card
+
 
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
@@ -32,6 +35,27 @@ class GameActivity : AppCompatActivity() {
 
         binding = ActivityGameBinding.inflate(layoutInflater)
         vm = ViewModelProvider(this)[GameViewModel::class.java]
+
+        val menuItems = listOf("Rules", "Exit")
+        val menuAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, menuItems)
+        val autoCompleteTextView = binding.menu.editText as? AutoCompleteTextView
+        autoCompleteTextView?.setAdapter(menuAdapter)
+
+        autoCompleteTextView?.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = menuItems[position]
+            when (selectedItem) {
+                "Rules" -> {
+                    // Visa reglerna
+                    val dialogFragment = RulesDialogFragment()
+                    dialogFragment.show(supportFragmentManager, "Test")
+                }
+                "Exit" -> {
+                    // Avsluta spelet
+                    finish()
+
+                }
+            }
+        }
 
         enableEdgeToEdge()
 
