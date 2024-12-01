@@ -3,7 +3,7 @@ package com.example.kima
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.kima.models.Player
+import com.example.kima.models.PlayerManager
 
 /*class RulesModule(viewModel: GameViewModel) : GameLogics {
 
@@ -40,12 +40,12 @@ import com.example.kima.models.Player
 class RulesModule(viewModel: GameViewModel) {
 
 
-    private val player = Player("You", viewModel.userCard.value)
-    private val computer = Player("Computer", viewModel.computerCard.value)
+    private val player = PlayerManager("You")
+    private val computer = PlayerManager("Computer")
     private var activePlayer = player
 
-    private val _winner= MutableLiveData<Player>()
-    val winner: LiveData<Player> get() = _winner
+    private val _winner= MutableLiveData<PlayerManager>()
+    val winner: LiveData<PlayerManager> get() = _winner
 
     init {
         viewModel.userCard.observeForever { card ->

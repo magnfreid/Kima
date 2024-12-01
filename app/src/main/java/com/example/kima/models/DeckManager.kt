@@ -6,26 +6,7 @@ import com.example.kima.R
 
 class DeckManager {
 
-    val deck: MutableList<Card> = generateDeck()
-
-    private val _userHand = MutableLiveData<MutableList<Card>>()
-    val userHand: LiveData<MutableList<Card>> get() = _userHand
-
-    private val _computerHand = MutableLiveData<MutableList<Card>>()
-    val computerHand: LiveData<MutableList<Card>> get() = _computerHand
-
-    private val _computerCard = MutableLiveData<Card>()
-    val computerCard: LiveData<Card> get() = _computerCard
-
-    private val _userCard = MutableLiveData<Card>()
-    val userCard: LiveData<Card> get() = _userCard
-
-
-
-    init {
-        _userHand.value = drawFullHand(userHand.value ?: mutableListOf())
-        _computerHand.value = drawFullHand(computerHand.value ?: mutableListOf())
-    }
+    private val deck: MutableList<Card> = generateDeck()
 
 
     fun randomiseComputerCard(): Card {
@@ -38,32 +19,22 @@ class DeckManager {
         return randomCard
     }
 
-    private fun randomiseCard(deck: MutableList<Card>): Int {
-        return (0 until deck.size).random()
-    }
 
-    private fun drawCardUser(deck: MutableList<Card>, hand: MutableList<Card>) {
-        val randomIndex = randomiseCard(deck)
+    private fun drawCard(): Card {
+        val randomIndex = (0 until deck.size).random()
         val randomCard = deck[randomIndex]
         deck.removeAt(randomIndex)
-        hand.add(randomCard)
+        return randomCard
     }
 
-    fun drawFullHand(hand: MutableList<Card>): MutableList<Card> {
-        hand.clear()
-
-        for (i in 1..5) {
-            drawCardUser(deck, hand)
+    fun drawFullHand(): MutableList<Card> {
+        val hand = mutableListOf<Card>()
+        repeat(5) {
+            hand.add(drawCard())
         }
-
         return hand
+
     }
-
-
-    fun updatePlayerCard(card: Card) {
-        _userCard.value = card
-    }
-
 
 
     fun generateDeck(): MutableList<Card> {

@@ -1,11 +1,10 @@
 package com.example.kima
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kima.models.Card
 import com.example.kima.models.DeckManager
-import com.example.kima.models.Player
+import com.example.kima.models.PlayerManager
 import com.example.kima.models.ScoreManager
 
 /*class GameViewModel : ViewModel(), GameLogics {
@@ -67,8 +66,9 @@ interface GameLogics {
 class GameViewModel : ViewModel() {
 
     private val deckManager = DeckManager()
-    private val rulesModule = RulesModule(this)
+ private val playerManager= PlayerManager()
     private val scoreManager = ScoreManager()
+    private val rulesModule = RulesModule(this)
 
 
 //-------------------------LIVEDATA---------------------------------------------------------------//
@@ -76,30 +76,25 @@ class GameViewModel : ViewModel() {
 
     // LiveData for score
 
-    val userScore: LiveData<Int> get() = scoreManager.userScore
-
-    val computerScore: LiveData<Int> get() = scoreManager.computerScore
-
     val scoreBoardCollection: LiveData<MutableList<ScoreManager.ScoreBoardRow>> get() = scoreManager.scoreBoardScoreCollection
 
-    // LiveData for user's hand
-    val userHand: LiveData<MutableList<Card>> get() = deckManager.userHand
 
-    // LiveData for computer's played card
-    val userCard: LiveData<Card> get() = deckManager.userCard
-
-    // LiveData for computer's played card
-    val computerCard: LiveData<Card> get() = deckManager.computerCard
 
     // Livedata for winner
-    val winner: LiveData<Player> get() = rulesModule.winner
+    val winner: LiveData<PlayerManager> get() = rulesModule.winner
 
 
 //------------------------------FUNCTIONS---------------------------------------------------------//
 
+    fun dealPlayerHand(){
+        playerManager.drawPlayerHand(deckManager.drawFullHand())
+    }
+
+    fun dealComputerHand(){
+        playerManager.drawComputerHand(deckManager.drawFullHand())
+    }
 
     fun updatePlayerCard(card: Card) {
-        deckManager.updatePlayerCard(card)
 
     }
 
