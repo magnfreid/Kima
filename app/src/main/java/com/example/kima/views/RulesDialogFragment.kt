@@ -1,10 +1,11 @@
-package com.example.kima
+package com.example.kima.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.kima.R
 import com.google.android.material.button.MaterialButton
 
 class RulesDialogFragment : DialogFragment() {

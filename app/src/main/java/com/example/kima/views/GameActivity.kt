@@ -1,36 +1,28 @@
-package com.example.kima
+package com.example.kima.views
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.kima.viewmodel.GameViewModel
+import com.example.kima.R
 import com.example.kima.databinding.ActivityGameBinding
 import com.example.kima.models.Card
-import com.example.kima.models.DeckManager
-import com.example.kima.views.ScoreBoardDialogFragment
 
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
-    lateinit var vm : GameViewModel
-val playedCardFragment: Fragment = PlayedCardFragment()
+    lateinit var vm: GameViewModel
+    val playedCardFragment: Fragment = PlayedCardFragment()
     val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
-        //TODO visa även motspelarens kort här
-
         showFragment(playedCardFragment)
-
         val computerCard: Card?
         computerCard = displayComputerCard()
         binding.presentComputerCard.setImageResource(computerCard.id)
-
         val trickDialogFragment = TrickDialogFragment()
         trickDialogFragment.show(supportFragmentManager, "Trick")
-
-
-        Log.d("SOUT", "${vm.userCard.value}")
     }
 
 
@@ -39,7 +31,7 @@ val playedCardFragment: Fragment = PlayedCardFragment()
         super.onCreate(savedInstanceState)
 
         binding = ActivityGameBinding.inflate(layoutInflater)
-        vm = ViewModelProvider(this).get(GameViewModel::class.java)
+        vm = ViewModelProvider(this)[GameViewModel::class.java]
 
         enableEdgeToEdge()
 
@@ -50,22 +42,16 @@ val playedCardFragment: Fragment = PlayedCardFragment()
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        vm.dealPlayerHand()
+        vm.dealComputerHand()
 
         showFragment(handOfCardsFragment)
 
         //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
         binding.btnShowHand.setOnClickListener {
-            ScoreBoardDialogFragment().show(supportFragmentManager, "Scoreboard")
-        }
-
-
-        vm.computerCard.observe(this) {
-            if(it != null) {
-//                binding.presentComputerCard.setImageResource(computerCard!!.id)
-            }
+            ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
         }
     }
-
 
 
     private fun showFragment(fragment: Fragment) {
@@ -75,7 +61,7 @@ val playedCardFragment: Fragment = PlayedCardFragment()
         }
     }
 
-    private fun displayComputerCard() : Card {
+    private fun displayComputerCard(): Card {
         val card = vm.randomiseComputerCard()
         return card
 

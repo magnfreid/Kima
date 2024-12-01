@@ -10,12 +10,11 @@ import android.view.ViewGroup
 import android.widget.GridLayout
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.kima.GameViewModel
+import com.example.kima.viewmodel.GameViewModel
 import com.example.kima.databinding.DialogScoreboardBinding
-import com.example.kima.models.ScoreManager
 import com.google.android.material.textview.MaterialTextView
 
-class ScoreBoardDialogFragment : DialogFragment() {
+class ScoreboardDialogFragment : DialogFragment() {
     private lateinit var binding: DialogScoreboardBinding
     private lateinit var vm: GameViewModel
     override fun onCreateView(
@@ -51,12 +50,12 @@ class ScoreBoardDialogFragment : DialogFragment() {
                 row++
             }
         }
-        vm.userScore.observe(viewLifecycleOwner) {
+        vm.player.observe(viewLifecycleOwner) {
             grid.addView(customTextView(requireContext(), "Total", 0, row, true))
-            grid.addView(customTextView(requireContext(), it.toString(), 1, row, true))
+            grid.addView(customTextView(requireContext(), it.score.toString(), 1, row, true))
         }
-        vm.computerScore.observe(viewLifecycleOwner) {
-            grid.addView(customTextView(requireContext(), it.toString(), 2, row, true))
+        vm.player.observe(viewLifecycleOwner) {
+            grid.addView(customTextView(requireContext(), it.score.toString(), 2, row, true))
         }
     }
 
