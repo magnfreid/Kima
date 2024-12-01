@@ -22,6 +22,7 @@ class GameRules(
                 }
             }
         }
+        activePlayer = winner
         return winner
     }
 
