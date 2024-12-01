@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kima.databinding.ActivityGameBinding
 import com.example.kima.models.Card
 import com.example.kima.models.DeckManager
+import com.example.kima.views.ScoreBoardDialogFragment
 
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
@@ -52,6 +53,10 @@ val playedCardFragment: Fragment = PlayedCardFragment()
 
         showFragment(handOfCardsFragment)
 
+        //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
+        binding.btnShowHand.setOnClickListener {
+            ScoreBoardDialogFragment().show(supportFragmentManager, "Scoreboard")
+        }
 
 
         vm.computerCard.observe(this) {

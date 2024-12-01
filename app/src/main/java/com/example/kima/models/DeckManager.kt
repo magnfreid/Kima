@@ -22,14 +22,13 @@ class DeckManager {
 
 
 
-
     init {
         _userHand.value = drawFullHand(userHand.value ?: mutableListOf())
         _computerHand.value = drawFullHand(computerHand.value ?: mutableListOf())
     }
 
 
-    fun randomiseComputerCard() : Card {
+    fun randomiseComputerCard(): Card {
         val currentComputerHand = _computerHand.value ?: mutableListOf()
         val randomIndex = (1 until currentComputerHand.size).random()
         val randomCard = currentComputerHand[randomIndex]
@@ -39,7 +38,7 @@ class DeckManager {
         return randomCard
     }
 
-    private fun randomiseCard(deck : MutableList<Card>) : Int {
+    private fun randomiseCard(deck: MutableList<Card>): Int {
         return (0 until deck.size).random()
     }
 
@@ -50,24 +49,26 @@ class DeckManager {
         hand.add(randomCard)
     }
 
-    fun drawFullHand(hand: MutableList<Card>) : MutableList<Card> {
+    fun drawFullHand(hand: MutableList<Card>): MutableList<Card> {
         hand.clear()
 
-        for(i in 1..5) {
+        for (i in 1..5) {
             drawCardUser(deck, hand)
         }
 
         return hand
     }
 
-fun updatePlayerCard(card: Card){
-    _userCard.value = card
-}
+
+    fun updatePlayerCard(card: Card) {
+        _userCard.value = card
+    }
 
 
-    fun generateDeck() : MutableList<Card> {
+
+    fun generateDeck(): MutableList<Card> {
         var deck = mutableListOf<Card>()
-            //        CLUBS
+        //        CLUBS
         deck.add(Card("clubs", 3, R.drawable.clubs_3))
         deck.add(Card("clubs", 4, R.drawable.clubs_4))
         deck.add(Card("clubs", 5, R.drawable.clubs_5))

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.kima.models.Card
 import com.example.kima.models.DeckManager
 import com.example.kima.models.Player
+import com.example.kima.models.ScoreManager
 
 /*class GameViewModel : ViewModel(), GameLogics {
 
@@ -67,14 +68,19 @@ class GameViewModel : ViewModel() {
 
     private val deckManager = DeckManager()
     private val rulesModule = RulesModule(this)
+    private val scoreManager = ScoreManager()
 
 
 //-------------------------LIVEDATA---------------------------------------------------------------//
 
 
     // LiveData for score
-    private val _score = MutableLiveData<Int>()
-    val score: LiveData<Int> get() = _score
+
+    val userScore: LiveData<Int> get() = scoreManager.userScore
+
+    val computerScore: LiveData<Int> get() = scoreManager.computerScore
+
+    val scoreBoardCollection: LiveData<MutableList<ScoreManager.ScoreBoardRow>> get() = scoreManager.scoreBoardScoreCollection
 
     // LiveData for user's hand
     val userHand: LiveData<MutableList<Card>> get() = deckManager.userHand
@@ -105,7 +111,7 @@ class GameViewModel : ViewModel() {
         rulesModule.resolveTurn()
     }
 
-    fun randomiseComputerCard() : Card {
+    fun randomiseComputerCard(): Card {
         return deckManager.randomiseComputerCard()
     }
 
