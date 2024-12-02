@@ -3,6 +3,8 @@ package com.example.kima.views
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,28 +12,28 @@ import android.view.ViewGroup
 import android.widget.GridLayout
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.kima.GameViewModel
+import com.example.kima.R
+import com.example.kima.viewmodel.GameViewModel
 import com.example.kima.databinding.DialogScoreboardBinding
-import com.example.kima.models.ScoreManager
 import com.google.android.material.textview.MaterialTextView
 
-class ScoreBoardDialogFragment : DialogFragment() {
+class ScoreboardDialogFragment : DialogFragment() {
     private lateinit var binding: DialogScoreboardBinding
     private lateinit var vm: GameViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
+        vm = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         binding = DialogScoreboardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         val grid = binding.gridScoreboard
         var row = 1
         vm.scoreBoardCollection.observe(viewLifecycleOwner) {
+            Log.d("SOUT", "From observer: $it")
             for (scoresRow in it) {
                 grid.addView(
                     customTextView(
@@ -51,19 +53,21 @@ class ScoreBoardDialogFragment : DialogFragment() {
                 row++
             }
         }
-        vm.userScore.observe(viewLifecycleOwner) {
+        vm.player.observe(viewLifecycleOwner) {
+            Log.d("SOUT", "${it.score} observed.")
             grid.addView(customTextView(requireContext(), "Total", 0, row, true))
-            grid.addView(customTextView(requireContext(), it.toString(), 1, row, true))
+            grid.addView(customTextView(requireContext(), it.score.toString(), 1, row, true))
         }
-        vm.computerScore.observe(viewLifecycleOwner) {
-            grid.addView(customTextView(requireContext(), it.toString(), 2, row, true))
+        vm.computer.observe(viewLifecycleOwner) {
+            Log.d("SOUT", "${it.score} observed.")
+            grid.addView(customTextView(requireContext(), it.score.toString(), 2, row, true))
         }
     }
 
     private fun customTextView(
         context: Context, textString: String, column: Int, row: Int, bold: Boolean
     ): MaterialTextView {
-        val textView = MaterialTextView(context).apply {
+        val textView = MaterialTextView(ContextThemeWrapper(context, R.style.TVScoreboard)).apply {
             text = textString
             if (bold) setTypeface(null, Typeface.BOLD)
             gravity = Gravity.CENTER
@@ -75,6 +79,7 @@ class ScoreBoardDialogFragment : DialogFragment() {
                 (this as ViewGroup.MarginLayoutParams).setMargins(1, 1, 1, 1)
             }
         }
+        Log.d("SOUT", "Textview created!")
         return textView
     }
 

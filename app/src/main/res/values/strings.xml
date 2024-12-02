@@ -31,4 +31,10 @@ Ingen spelare tittar på något kort och alla chansar på 0 eller 1 stick.
 I slutet räknas samtliga poäng och den spelare med flest poäng vinner.</string>
     <string name="rules_dialog_close_btn_text">Stäng</string>
     <string name="btn_place_card_text">Lägg</string>
+    <string name="scoreboard_title">Scoreboard</string>
+    <string name="scoreboard_round">Round</string>
+    <string name="scoreboard_you">You</string>
+    <string name="scoreboard_cpu">CPU</string>
+    <string name="scoreboard_main_menu_button">Main menu</string>
+    <string name="scoreboard_play_again_button">Play again</string>
 </resources>

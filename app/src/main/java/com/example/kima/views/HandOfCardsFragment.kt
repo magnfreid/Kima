@@ -1,15 +1,16 @@
-package com.example.kima
+package com.example.kima.views
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
+import com.example.kima.R
 import com.example.kima.databinding.FragmentHandOfCardsBinding
 import com.example.kima.models.Card
+import com.example.kima.viewmodel.GameViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -19,9 +20,9 @@ import com.example.kima.models.Card
 class HandOfCardsFragment(
     val onShowPlayedHand: () -> Unit
 ) : Fragment() {
-    val userHandView: MutableList<ImageView> = mutableListOf()
-    lateinit var binding: FragmentHandOfCardsBinding
-    lateinit var vm: GameViewModel
+    private val userHandView: MutableList<ImageView> = mutableListOf()
+    private lateinit var binding: FragmentHandOfCardsBinding
+    private lateinit var vm: GameViewModel
     var userHand = mutableListOf<Card>()
     var chosenCard: Card? = null
 
@@ -29,11 +30,11 @@ class HandOfCardsFragment(
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentHandOfCardsBinding.inflate(inflater, container, false)
 
-        vm = ViewModelProvider(requireActivity()).get(GameViewModel::class.java)
+        vm = ViewModelProvider(requireActivity())[GameViewModel::class.java]
 
         return binding.root
     }
@@ -41,15 +42,13 @@ class HandOfCardsFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm.userHand.observe(viewLifecycleOwner) {
-            userHand = it
+        vm.player.observe(viewLifecycleOwner) {
+            userHand = it.hand ?: mutableListOf()
             setUpImageViewsForUserHand(view)
             displayUserHand(userHandView, userHand)
         }
 
         binding.btnPlaceCard.setOnClickListener {
-            Log.d("SOUT", "${vm.userCard.value} BEFORE")
-
             for (card in userHand) {
                     if (card.isRaised) {
                         chosenCard = card
@@ -58,8 +57,6 @@ class HandOfCardsFragment(
                 }
             if(chosenCard != null) {
                 vm.updatePlayerCard(chosenCard!!)
-                Log.d("SOUT", "${vm.userCard.value} AFTER")
-                Log.d("SOUT", "$vm HOC FRAGMENT")
                 onShowPlayedHand()
             }
         }

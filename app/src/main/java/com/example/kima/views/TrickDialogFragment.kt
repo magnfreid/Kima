@@ -1,4 +1,4 @@
-package com.example.kima
+package com.example.kima.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.kima.models.Player
+import com.example.kima.R
+import com.example.kima.viewmodel.GameViewModel
 
 class TrickDialogFragment : DialogFragment() {
 
-    lateinit var vm: GameViewModel
+    private lateinit var vm: GameViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +35,10 @@ class TrickDialogFragment : DialogFragment() {
         val btnNextTrick = view.findViewById<Button>(R.id.btn_next_trick)
         val tvDisplayTrickWinner = view.findViewById<TextView>(R.id.tv_display_trick_winner)
 
-
-        vm.winner.observe(viewLifecycleOwner) { newWinner ->
-            tvDisplayTrickWinner.text = "${newWinner.name} won!"
-        }
-
-        vm.checkWinner()
+        val winner = vm.checkWinner()
+        val winnerString = "${winner?.name} won!"
+        tvDisplayTrickWinner.text = winnerString
+        vm.resolveTurn()
 
         btnNextTrick.setOnClickListener {
             dialog?.dismiss()

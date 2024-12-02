@@ -7,4 +7,8 @@
         <item name="android:layout_height">140dp</item>
     </style>
 
+    <style name="TVScoreboard" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_margin">18dp</item>
+    </style>
+
 </resources>
