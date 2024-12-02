@@ -75,19 +75,30 @@ class HandOfCardsFragment(
         userHandView.add(ivUserCard4)
         userHandView.add(ivUserCard5)
 
+        var raisedCardIndex = -1
+
 
         for (imageView in userHandView) {
             imageView.setOnClickListener {
-                if (userHand[userHandView.indexOf(imageView)].isRaised) {
+                val currentIndex = userHandView.indexOf(imageView)
+                if (userHand[currentIndex].isRaised) {
                     imageView.animate().translationY(0f).setDuration(150)
-                    userHand[userHandView.indexOf(imageView)].isRaised = false
+                    userHand[currentIndex].isRaised = false
+                    raisedCardIndex = -1
                 } else {
+                    if(raisedCardIndex != -1) {
+                        userHandView[raisedCardIndex].animate().translationY(0f).setDuration(150)
+                        userHand[raisedCardIndex].isRaised = false
+
+                    }
                     imageView.animate().translationY(-50f).setDuration(150)
-                    userHand[userHandView.indexOf(imageView)].isRaised = true
+                    userHand[currentIndex].isRaised = true
+                    raisedCardIndex = currentIndex
                 }
             }
         }
     }
+
 
     fun displayUserHand(userHandView: MutableList<ImageView>, userHand: MutableList<Card>) {
         for (i in 0..userHand.size - 1) {
