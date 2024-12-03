@@ -22,7 +22,7 @@ class DeckManager {
 
     fun drawFullHand(): MutableList<Card> {
         val hand = mutableListOf<Card>()
-        repeat(4) {
+        repeat(5) {
             hand.add(drawCard())
         }
         return hand

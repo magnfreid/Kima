@@ -48,6 +48,8 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
+        binding.presentComputerCard.setImageResource(R.drawable.back_of_card)
+
         showFragment(handOfCardsFragment)
         //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
         binding.btnShowHand.setOnClickListener {

@@ -46,10 +46,9 @@ class TrickDialogFragment : DialogFragment() {
         btnNextTrick.setOnClickListener {
 
             vm.resetTrick()
-            (activity as? GameActivity)?.showFragment(HandOfCardsFragment {
-                Log.i("!!!", "triggered function")
-            }) // Call showFragment() with a new instance of HandOfCardsFragment
-//            (activity as? GameActivity)?.showHandOfCards()
+
+            (activity as? GameActivity)?.showHandOfCards()
+
             dialog?.dismiss()
 
 

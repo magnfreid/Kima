@@ -56,23 +56,19 @@ class HandOfCardsFragment(
         ivUserCard4 = view.findViewById(R.id.iv_user_card_4)
         ivUserCard5 = view.findViewById(R.id.iv_user_card_5)
 
-
-
-        vm.player.observe(viewLifecycleOwner) {
-
-            userHand = it.hand ?: mutableListOf()
-            setUpImageViewsForUserHand(view)
-            displayUserHand(userHandView, userHand)
-
-        }
-
         vm.startNextTrick.observe(viewLifecycleOwner) {
             startNextTrick ->
             if(startNextTrick) {
+                vm.startNextTrickConsumed()
+                Log.i("???", userHand.toString())
+                userHandView.clear() // Clear the list before adding ImageViews
+                Log.i("!!!", userHand.toString())
+
                 vm.player.observe(viewLifecycleOwner) {
                     userHand = it.hand ?: mutableListOf()
                     setUpImageViewsForUserHand(view)
                     displayUserHand(userHandView, userHand)
+                    Log.i("AAA", userHand.toString())
                 }
 
                 binding.btnPlaceCard.setOnClickListener {
@@ -89,12 +85,10 @@ class HandOfCardsFragment(
 //                        userHand.remove(chosenCard)
                         vm.removePlayedCard(chosenCard!!)
                         onShowPlayedHand()
+                        Log.i("BBB", userHand.toString())
                     }
 
                 }
-
-
-//                vm.startNextTrickConsumed()
             }
         }
 
@@ -102,14 +96,6 @@ class HandOfCardsFragment(
     }
 
     private fun setUpImageViewsForUserHand(view: View) {
-        Log.i("!!!", "testing to display hand")
-//            Log.i("???", it.hand.toString())
-        /*val ivUserCard1 = view.findViewById<ImageView>(R.id.iv_user_card_1)
-        val ivUserCard2 = view.findViewById<ImageView>(R.id.iv_user_card_2)
-        val ivUserCard3 = view.findViewById<ImageView>(R.id.iv_user_card_3)
-        val ivUserCard4 = view.findViewById<ImageView>(R.id.iv_user_card_4)
-        val ivUserCard5 = view.findViewById<ImageView>(R.id.iv_user_card_5)*/
-
         userHandView.add(ivUserCard1)
         userHandView.add(ivUserCard2)
         userHandView.add(ivUserCard3)
@@ -118,8 +104,8 @@ class HandOfCardsFragment(
 
         var raisedCardIndex = -1
 
-
-        for (imageView in userHandView) {
+        for (i in 0 until userHand.size) {
+            val imageView = userHandView[i]
             imageView.setOnClickListener {
                 val currentIndex = userHandView.indexOf(imageView)
                 if (userHand[currentIndex].isRaised) {
@@ -138,6 +124,7 @@ class HandOfCardsFragment(
                 }
             }
         }
+
     }
 
 

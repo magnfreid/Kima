@@ -80,7 +80,6 @@ class GameViewModel : ViewModel() {
     }
 
     fun resetTrick() {
-//        playerManager.resetPlayedCards()
         trickCounter++
         if(trickCounter <5) {
             _startNextTrick.value = true
