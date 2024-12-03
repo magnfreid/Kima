@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.kima.R
 import com.example.kima.viewmodel.GameViewModel
@@ -36,6 +38,15 @@ class GameActivity : AppCompatActivity() {
         vm = ViewModelProvider(this)[GameViewModel::class.java]
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        vm.imageChangeEvent.observe(this){ changeImage ->
+            if(changeImage) {
+                val imageView : ImageView = findViewById(R.id.present_computer_card)
+                imageView.setImageResource(R.drawable.back_of_card)
+                vm.imageChangeEvent.value = false
+            }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

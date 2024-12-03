@@ -19,20 +19,26 @@ class GameViewModel : ViewModel() {
     private val gameRules = GameRules(player.value, computer.value) { winner ->
         onResolveTurn(winner)
     }
+    private var trickCounter = 0
 
 
 //-------------------------LIVEDATA---------------------------------------------------------------//
 
 
+    // Livedata for player and computer Player-objects.
     val player: LiveData<Player> get() = playerManager.player
     val computer: LiveData<Player> get() = playerManager.computer
 
     val scoreBoardCollection: LiveData<MutableList<Scoreboard.ScoreboardRow>> get() = scoreboard.scoreBoardScoreCollection
 
+    // Livedata for triggering the next trick in the HandOfCardsFragment.
     val _startNextTrick = MutableLiveData<Boolean>(true)
     val startNextTrick: LiveData<Boolean> get() = _startNextTrick
 
-    private var trickCounter = 0
+    // LiveData for updating the back-of-card image for computer's played card spot.
+    val imageChangeEvent = MutableLiveData<Boolean>()
+
+
 
 //------------------------------FUNCTIONS---------------------------------------------------------//
 
