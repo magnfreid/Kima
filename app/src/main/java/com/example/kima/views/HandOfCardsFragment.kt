@@ -1,6 +1,7 @@
 package com.example.kima.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,12 @@ class HandOfCardsFragment(
     var userHand = mutableListOf<Card>()
     var chosenCard: Card? = null
 
+    lateinit var ivUserCard1: ImageView
+    lateinit var ivUserCard2: ImageView
+    lateinit var ivUserCard3: ImageView
+    lateinit var ivUserCard4: ImageView
+    lateinit var ivUserCard5: ImageView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,32 +49,66 @@ class HandOfCardsFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val parentLayoutForHand = binding.layoutForHand
+        ivUserCard1 = view.findViewById(R.id.iv_user_card_1)
+        ivUserCard2 = view.findViewById(R.id.iv_user_card_2)
+        ivUserCard3 = view.findViewById(R.id.iv_user_card_3)
+        ivUserCard4 = view.findViewById(R.id.iv_user_card_4)
+        ivUserCard5 = view.findViewById(R.id.iv_user_card_5)
+
+
+
         vm.player.observe(viewLifecycleOwner) {
+
             userHand = it.hand ?: mutableListOf()
             setUpImageViewsForUserHand(view)
             displayUserHand(userHandView, userHand)
+
         }
 
-        binding.btnPlaceCard.setOnClickListener {
-            for (card in userHand) {
-                    if (card.isRaised) {
-                        chosenCard = card
-                        break
-                    }
+        vm.startNextTrick.observe(viewLifecycleOwner) {
+            startNextTrick ->
+            if(startNextTrick) {
+                vm.player.observe(viewLifecycleOwner) {
+                    userHand = it.hand ?: mutableListOf()
+                    setUpImageViewsForUserHand(view)
+                    displayUserHand(userHandView, userHand)
                 }
-            if(chosenCard != null) {
-                vm.updatePlayerCard(chosenCard!!)
-                onShowPlayedHand()
+
+                binding.btnPlaceCard.setOnClickListener {
+                    for (card in userHand) {
+                        if (card.isRaised) {
+                            chosenCard = card
+                            break
+                        }
+                    }
+                    if(chosenCard != null) {
+                        vm.updatePlayerCard(chosenCard!!)
+                        parentLayoutForHand.removeView(userHandView[userHand.indexOf(chosenCard)])
+//                        userHandView.remove(userHandView[userHand.indexOf(chosenCard)])
+//                        userHand.remove(chosenCard)
+                        vm.removePlayedCard(chosenCard!!)
+                        onShowPlayedHand()
+                    }
+
+                }
+
+
+//                vm.startNextTrickConsumed()
             }
         }
+
+
     }
 
     private fun setUpImageViewsForUserHand(view: View) {
-        val ivUserCard1 = view.findViewById<ImageView>(R.id.iv_user_card_1)
+        Log.i("!!!", "testing to display hand")
+//            Log.i("???", it.hand.toString())
+        /*val ivUserCard1 = view.findViewById<ImageView>(R.id.iv_user_card_1)
         val ivUserCard2 = view.findViewById<ImageView>(R.id.iv_user_card_2)
         val ivUserCard3 = view.findViewById<ImageView>(R.id.iv_user_card_3)
         val ivUserCard4 = view.findViewById<ImageView>(R.id.iv_user_card_4)
-        val ivUserCard5 = view.findViewById<ImageView>(R.id.iv_user_card_5)
+        val ivUserCard5 = view.findViewById<ImageView>(R.id.iv_user_card_5)*/
 
         userHandView.add(ivUserCard1)
         userHandView.add(ivUserCard2)
@@ -104,6 +145,7 @@ class HandOfCardsFragment(
         for (i in 0..userHand.size - 1) {
             val card = userHand[i]
             userHandView[i].setImageResource(card.id)
+
         }
 
     }
