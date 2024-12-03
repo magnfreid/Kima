@@ -10,7 +10,7 @@ class GameRules(
 ) {
 
     private var activePlayer = player
-    private var winner: Player? = null
+    var winner: Player? = player
 
     fun checkWinner(): Player? {
         winner = activePlayer
