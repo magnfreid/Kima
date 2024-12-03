@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnRules.setOnClickListener{
             val dialogFragment = RulesDialogFragment()
-            dialogFragment.show(supportFragmentManager, "Test")
+            dialogFragment.show(supportFragmentManager, "Rules")
         }
     }
 }

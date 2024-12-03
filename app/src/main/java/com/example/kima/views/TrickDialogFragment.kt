@@ -1,5 +1,6 @@
 package com.example.kima.views
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,6 +33,13 @@ class TrickDialogFragment : DialogFragment() {
         return inflater.inflate(R.layout.dialog_tricks, container, false)
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        return dialog
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,15 +51,23 @@ class TrickDialogFragment : DialogFragment() {
         tvDisplayTrickWinner.text = winnerString
         vm.resolveTurn()
 
-        btnNextTrick.setOnClickListener {
-
-            vm.resetTrick()
-
-            (activity as? GameActivity)?.showHandOfCards()
-
-            vm.imageChangeEvent.value = true
-
-            dialog?.dismiss()
+        vm.trickCounter.observe(viewLifecycleOwner) {
+            if (it < 4) {
+                btnNextTrick.setOnClickListener {
+                    vm.resetTrick()
+                    (activity as? GameActivity)?.showHandOfCards()
+                    vm.imageChangeEvent.value = true
+                    dialog?.dismiss()
+                }
+            } else {
+                val winnerText = "Game over!"
+                tvDisplayTrickWinner.text = winnerText
+                val btnText = "Show scoreboard"
+                btnNextTrick.text = btnText
+                btnNextTrick.setOnClickListener {
+                    (activity as? GameActivity)?.showScoreboard()
+                }
+            }
 
 
         }

@@ -62,11 +62,19 @@ class GameActivity : AppCompatActivity() {
         binding.presentComputerCard.setImageResource(R.drawable.back_of_card)
 
         showFragment(handOfCardsFragment)
-        //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
-        binding.btnShowHand.setOnClickListener {
-//            ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
-        }
+
         setupMenu()
+
+        val tvCpuPoints = binding.tvPointCounterCPU
+        val tvUserPoints = binding.tvPointCounterUser
+
+        vm.computer.observe(this){ score ->
+            tvCpuPoints.text = "${score.score} POINTS"
+        }
+        vm.player.observe(this){ score ->
+            tvUserPoints.text = "${score.score} POINTS"
+        }
+
     }
 
     private fun setupMenu() {
@@ -107,5 +115,9 @@ class GameActivity : AppCompatActivity() {
 
     fun showHandOfCards() {
         showFragment(handOfCardsFragment)
+    }
+
+    fun showScoreboard(){
+        ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
     }
 }
