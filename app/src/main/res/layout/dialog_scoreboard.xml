@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_main_menu"
+        app:layout_constraintBottom_toTopOf="@+id/btn_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,9 +31,9 @@
 
 
         <TextView
+            style="@style/TVScoreboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TVScoreboard"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:text="@string/scoreboard_round"
@@ -41,9 +41,9 @@
             android:textStyle="bold" />
 
         <TextView
+            style="@style/TVScoreboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TVScoreboard"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:text="@string/scoreboard_you"
@@ -51,9 +51,9 @@
             android:textStyle="bold" />
 
         <TextView
+            style="@style/TVScoreboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TVScoreboard"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:text="@string/scoreboard_cpu"
@@ -64,20 +64,13 @@
     </GridLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_main_menu"
+        android:id="@+id/btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/scoreboard_main_menu_button"
+        android:text="Close"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_play_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/scoreboard_play_again_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

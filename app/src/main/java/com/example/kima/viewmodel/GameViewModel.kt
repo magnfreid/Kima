@@ -19,7 +19,6 @@ class GameViewModel : ViewModel() {
     private val gameRules = GameRules(player.value, computer.value) { winner ->
         onResolveTurn(winner)
     }
-    private var trickCounter = 0
 
 
 //-------------------------LIVEDATA---------------------------------------------------------------//
@@ -38,10 +37,10 @@ class GameViewModel : ViewModel() {
     // LiveData for updating the back-of-card image for computer's played card spot.
     val imageChangeEvent = MutableLiveData<Boolean>()
 
+    val trickCounter = MutableLiveData(0)
 
 
 //------------------------------FUNCTIONS---------------------------------------------------------//
-
 
 
     fun dealPlayerHand() {
@@ -64,7 +63,7 @@ class GameViewModel : ViewModel() {
         gameRules.resolveTurn()
     }
 
-    fun removePlayedCard(card : Card) {
+    fun removePlayedCard(card: Card) {
         playerManager.removePlayedCard(card)
     }
 
@@ -74,9 +73,9 @@ class GameViewModel : ViewModel() {
         } else if (winner == computer.value) {
             playerManager.incrementComputerScore()
         }
-        val playerScore = player.value?.score ?: 0
-        val computerScore = computer.value?.score ?: 0
-        val round = 6 - player.value?.hand!!.size
+        val playerScore = if (winner == player.value) 1 else 0
+        val computerScore = if (winner == computer.value) 1 else 0
+        val round = 5 - player.value?.hand!!.size
         scoreboard.addScoreboardRow(round, playerScore, computerScore)
         Log.d("SOUT", "${scoreBoardCollection.value}")
     }
@@ -86,8 +85,8 @@ class GameViewModel : ViewModel() {
     }
 
     fun resetTrick() {
-        trickCounter++
-        if(trickCounter <5) {
+        trickCounter.value = trickCounter.value!! + 1
+        if (trickCounter.value!! < 5) {
             _startNextTrick.value = true
         } else {
             // TODO: End game logic!

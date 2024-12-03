@@ -52,29 +52,9 @@ class PlayerManager {
         }
     }
 
-    fun resetScores() {
-        _player.value?.let {
-            it.score = 0
-            _player.value = it
-        }
-        _computer.value?.let {
-            it.score = 0
-            _computer.value = it
-        }
-
-    }
-
-    fun resetPlayedCards() {
-        _player.value?.playedCard = null
-        _computer.value?.playedCard = null
-        _player.value = _player.value //Trigger LiveData update
-        _computer.value = _computer.value // Trigger LiveData update
-    }
-
-
     fun randomiseComputerCard(): Card {
         val currentComputerHand = _computer.value?.hand ?: mutableListOf()
-        val randomIndex = (1 until currentComputerHand.size).random()
+        val randomIndex = (0 until currentComputerHand.size).random()
         val randomCard = currentComputerHand[randomIndex]
         currentComputerHand.removeAt(randomIndex)
         _computer.value?.hand = currentComputerHand

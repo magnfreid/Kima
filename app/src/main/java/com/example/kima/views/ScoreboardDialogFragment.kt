@@ -1,5 +1,6 @@
 package com.example.kima.views
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
@@ -26,6 +27,13 @@ class ScoreboardDialogFragment : DialogFragment() {
         vm = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         binding = DialogScoreboardBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        return dialog
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,6 +69,10 @@ class ScoreboardDialogFragment : DialogFragment() {
         vm.computer.observe(viewLifecycleOwner) {
             Log.d("SOUT", "${it.score} observed.")
             grid.addView(customTextView(requireContext(), it.score.toString(), 2, row, true))
+        }
+
+        binding.btnClose.setOnClickListener {
+            (activity as GameActivity).finish()
         }
     }
 
