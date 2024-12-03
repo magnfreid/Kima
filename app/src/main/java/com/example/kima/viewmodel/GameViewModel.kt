@@ -16,7 +16,7 @@ class GameViewModel : ViewModel() {
     private val deckManager = DeckManager()
     private val playerManager = PlayerManager()
     private val scoreboard = Scoreboard()
-    private val gameRules = GameRules(player.value, computer.value) { winner ->
+    val gameRules = GameRules(player.value, computer.value) { winner ->
         onResolveTurn(winner)
     }
 
@@ -70,6 +70,7 @@ class GameViewModel : ViewModel() {
     private fun onResolveTurn(winner: Player?) {
         if (winner == player.value) {
             playerManager.incrementPlayerScore()
+
         } else if (winner == computer.value) {
             playerManager.incrementComputerScore()
         }

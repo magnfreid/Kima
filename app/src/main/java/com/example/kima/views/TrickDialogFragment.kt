@@ -17,7 +17,6 @@ import com.example.kima.viewmodel.GameViewModel
 class TrickDialogFragment : DialogFragment() {
 
     private lateinit var vm: GameViewModel
-    val playedCardFragment: Fragment = PlayedCardFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +53,12 @@ class TrickDialogFragment : DialogFragment() {
         vm.trickCounter.observe(viewLifecycleOwner) {
             if (it < 4) {
                 btnNextTrick.setOnClickListener {
+                    val gameActivity = (activity as? GameActivity)
+                    if (vm.gameRules.winner == vm.computer.value) {
+                        gameActivity?.displayComputerCard()
+                    } else {
+                        gameActivity?.setBackOfCardToComputerCard()
+                    }
                     vm.resetTrick()
                     (activity as? GameActivity)?.showHandOfCards()
                     vm.imageChangeEvent.value = true

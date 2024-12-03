@@ -24,9 +24,11 @@ class GameActivity : AppCompatActivity() {
     private val playedCardFragment: Fragment = PlayedCardFragment()
     private val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         showFragment(playedCardFragment)
-        val computerCard: Card?
-        computerCard = displayComputerCard()
-        binding.presentComputerCard.setImageResource(computerCard.id)
+
+        if (vm.gameRules.winner==vm.player.value) {
+            displayComputerCard()
+        }
+
         val trickDialogFragment = TrickDialogFragment()
         trickDialogFragment.show(supportFragmentManager, "Trick")
     }
@@ -38,14 +40,6 @@ class GameActivity : AppCompatActivity() {
         vm = ViewModelProvider(this)[GameViewModel::class.java]
         enableEdgeToEdge()
         setContentView(binding.root)
-
-        vm.imageChangeEvent.observe(this){ changeImage ->
-            if(changeImage) {
-                val imageView : ImageView = findViewById(R.id.present_computer_card)
-                imageView.setImageResource(R.drawable.back_of_card)
-                vm.imageChangeEvent.value = false
-            }
-        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -59,7 +53,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        binding.presentComputerCard.setImageResource(R.drawable.back_of_card)
+        setBackOfCardToComputerCard()
 
         showFragment(handOfCardsFragment)
 
@@ -75,6 +69,10 @@ class GameActivity : AppCompatActivity() {
             tvUserPoints.text = "${score.score} POINTS"
         }
 
+    }
+
+    fun setBackOfCardToComputerCard() {
+        binding.presentComputerCard.setImageResource(R.drawable.back_of_card)
     }
 
     private fun setupMenu() {
@@ -107,10 +105,14 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayComputerCard(): Card {
+    fun displayComputerCard() {
+        val card = drawComputerCard()
+        binding.presentComputerCard.setImageResource(card.id)
+    }
+
+    fun drawComputerCard(): Card {
         val card = vm.randomiseComputerCard()
         return card
-
     }
 
     fun showHandOfCards() {
