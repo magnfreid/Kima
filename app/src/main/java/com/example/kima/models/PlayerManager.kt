@@ -31,6 +31,13 @@ class PlayerManager {
         }
     }
 
+    fun removePlayedCard(card : Card) {
+        _player.value?.let {
+            it.hand?.remove(card)
+            _player.value = it
+        }
+    }
+
     fun incrementPlayerScore() {
         _player.value?.let {
             it.score += 1
@@ -55,6 +62,13 @@ class PlayerManager {
             _computer.value = it
         }
 
+    }
+
+    fun resetPlayedCards() {
+        _player.value?.playedCard = null
+        _computer.value?.playedCard = null
+        _player.value = _player.value //Trigger LiveData update
+        _computer.value = _computer.value // Trigger LiveData update
     }
 
 

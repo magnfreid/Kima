@@ -41,12 +41,19 @@ class GameActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        vm.dealPlayerHand()
-        vm.dealComputerHand()
+        vm.player.observe(this){
+            if(it.hand == null) {
+                vm.dealPlayerHand()
+                vm.dealComputerHand()
+            }
+        }
+
+        binding.presentComputerCard.setImageResource(R.drawable.back_of_card)
+
         showFragment(handOfCardsFragment)
         //TODO Placeholder for testing the scoreboard fragment, move to the correct place when possible
         binding.btnShowHand.setOnClickListener {
-            ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
+//            ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
         }
         setupMenu()
     }
@@ -74,7 +81,7 @@ class GameActivity : AppCompatActivity() {
     }
 
 
-    private fun showFragment(fragment: Fragment) {
+    fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(binding.fcvPlayer.id, fragment)
             commit()
@@ -85,5 +92,9 @@ class GameActivity : AppCompatActivity() {
         val card = vm.randomiseComputerCard()
         return card
 
+    }
+
+    fun showHandOfCards() {
+        showFragment(handOfCardsFragment)
     }
 }

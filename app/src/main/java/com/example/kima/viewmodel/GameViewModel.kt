@@ -2,6 +2,7 @@ package com.example.kima.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kima.models.Card
 import com.example.kima.models.DeckManager
@@ -28,8 +29,14 @@ class GameViewModel : ViewModel() {
 
     val scoreBoardCollection: LiveData<MutableList<Scoreboard.ScoreboardRow>> get() = scoreboard.scoreBoardScoreCollection
 
+    val _startNextTrick = MutableLiveData<Boolean>(true)
+    val startNextTrick: LiveData<Boolean> get() = _startNextTrick
+
+    private var trickCounter = 0
 
 //------------------------------FUNCTIONS---------------------------------------------------------//
+
+
 
     fun dealPlayerHand() {
         playerManager.updatePlayerHand(deckManager.drawFullHand())
@@ -51,6 +58,10 @@ class GameViewModel : ViewModel() {
         gameRules.resolveTurn()
     }
 
+    fun removePlayedCard(card : Card) {
+        playerManager.removePlayedCard(card)
+    }
+
     private fun onResolveTurn(winner: Player?) {
         if (winner == player.value) {
             playerManager.incrementPlayerScore()
@@ -66,6 +77,19 @@ class GameViewModel : ViewModel() {
 
     fun randomiseComputerCard(): Card {
         return playerManager.randomiseComputerCard()
+    }
+
+    fun resetTrick() {
+        trickCounter++
+        if(trickCounter <5) {
+            _startNextTrick.value = true
+        } else {
+            // TODO: End game logic!
+        }
+    }
+
+    fun startNextTrickConsumed() {
+        _startNextTrick.value = false // Reset the trigger
     }
 
 

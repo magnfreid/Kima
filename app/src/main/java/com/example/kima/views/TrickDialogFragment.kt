@@ -1,12 +1,14 @@
 package com.example.kima.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kima.R
 import com.example.kima.viewmodel.GameViewModel
@@ -14,6 +16,7 @@ import com.example.kima.viewmodel.GameViewModel
 class TrickDialogFragment : DialogFragment() {
 
     private lateinit var vm: GameViewModel
+    val playedCardFragment: Fragment = PlayedCardFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,14 @@ class TrickDialogFragment : DialogFragment() {
         vm.resolveTurn()
 
         btnNextTrick.setOnClickListener {
+
+            vm.resetTrick()
+
+            (activity as? GameActivity)?.showHandOfCards()
+
             dialog?.dismiss()
+
+
         }
 
     }
