@@ -49,6 +49,8 @@ class TrickDialogFragment : DialogFragment() {
 
             (activity as? GameActivity)?.showHandOfCards()
 
+            vm.imageChangeEvent.value = true
+
             dialog?.dismiss()
 
 
