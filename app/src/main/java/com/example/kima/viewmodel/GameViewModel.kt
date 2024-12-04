@@ -82,7 +82,11 @@ class GameViewModel : ViewModel() {
     }
 
     fun randomiseComputerCard(): Card {
-        return playerManager.randomiseComputerCard()
+        return playerManager.drawComputerRandomCard()
+    }
+
+    fun computerReactiveCardPick(): Card {
+        return playerManager.drawComputerReactiveCard()
     }
 
     fun resetTrick() {
