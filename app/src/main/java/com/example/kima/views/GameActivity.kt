@@ -1,5 +1,6 @@
 package com.example.kima.views
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -7,6 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -41,9 +43,12 @@ class GameActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setBackgroundColor(Color.BLACK)
             insets
         }
         vm.player.observe(this){
