@@ -15,9 +15,7 @@ import com.example.kima.models.Card
 import com.example.kima.viewmodel.GameViewModel
 
 /**
- * A simple [Fragment] subclass.
- * Use the [HandOfCardsFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Displays the player's hand of cards and a play card button.
  */
 class HandOfCardsFragment(
     val onShowPlayedHand: () -> Unit
@@ -25,14 +23,14 @@ class HandOfCardsFragment(
     private val userHandView: MutableList<ImageView> = mutableListOf()
     private lateinit var binding: FragmentHandOfCardsBinding
     private lateinit var vm: GameViewModel
-    var userHand = mutableListOf<Card>()
-    var chosenCard: Card? = null
+    private var userHand = mutableListOf<Card>()
+    private var chosenCard: Card? = null
 
-    lateinit var ivUserCard1: ImageView
-    lateinit var ivUserCard2: ImageView
-    lateinit var ivUserCard3: ImageView
-    lateinit var ivUserCard4: ImageView
-    lateinit var ivUserCard5: ImageView
+    private lateinit var ivUserCard1: ImageView
+    private lateinit var ivUserCard2: ImageView
+    private lateinit var ivUserCard3: ImageView
+    private lateinit var ivUserCard4: ImageView
+    private lateinit var ivUserCard5: ImageView
 
 
     override fun onCreateView(
@@ -66,7 +64,7 @@ class HandOfCardsFragment(
 
                 vm.player.observe(viewLifecycleOwner) {
                     userHand = it.hand ?: mutableListOf()
-                    setUpImageViewsForUserHand(view)
+                    setUpImageViewsForUserHand()
                     displayUserHand(userHandView, userHand)
                     Log.i("AAA", userHand.toString())
                 }
@@ -109,7 +107,7 @@ class HandOfCardsFragment(
 
     }
 
-    private fun setUpImageViewsForUserHand(view: View) {
+    private fun setUpImageViewsForUserHand() {
         userHandView.add(ivUserCard1)
         userHandView.add(ivUserCard2)
         userHandView.add(ivUserCard3)
@@ -141,9 +139,8 @@ class HandOfCardsFragment(
 
     }
 
-
-    fun displayUserHand(userHandView: MutableList<ImageView>, userHand: MutableList<Card>) {
-        for (i in 0..userHand.size - 1) {
+    private fun displayUserHand(userHandView: MutableList<ImageView>, userHand: MutableList<Card>) {
+        for (i in 0..<userHand.size) {
             val card = userHand[i]
             userHandView[i].setImageResource(card.id)
 

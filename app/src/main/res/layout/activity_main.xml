@@ -11,68 +11,56 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:backgroundTint="#73FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="80dp"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/aclonica"
-            android:textAlignment="center"
+            android:padding="10dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
             android:shadowColor="#FFFFFF"
             android:shadowDx="15"
             android:shadowDy="5"
             android:shadowRadius="4"
-            android:padding="10dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:text="KIMA!"
+            android:text="@string/app_title"
+            android:textAlignment="center"
             android:textColor="#521111"
-            android:textSize="80dp" />
-
+            android:textSize="80sp" />
     </androidx.cardview.widget.CardView>
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start"
+        style="@style/BtnKIMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
+        android:layout_marginBottom="20dp"
+        android:text="@string/btn_start_game"
         android:textSize="29sp"
-        android:text="Starta spel"
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/btn_rules"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_rules"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_rules"
+        style="@style/BtnKIMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Regler"
-        android:backgroundTint="#FFFFFF"
-        android:textColor="@color/black"
+        android:layout_marginBottom="50dp"
+        android:text="@string/btn_rule_text"
         android:textSize="20sp"
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="50dp"/>
-
-
-
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,26 @@
 <resources>
     <string name="app_name">Kima</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="rules_dialog_title">Regler:</string>
+    <string name="rules_dialog_title">Rules:</string>
+    <string name="rules_dialog_close_btn_text">Close</string>
+    <string name="btn_place_card_text">Play card</string>
+    <string name="scoreboard_title">Scoreboard</string>
+    <string name="scoreboard_round">Round</string>
+    <string name="scoreboard_you">You</string>
+    <string name="scoreboard_cpu">CPU</string>
+    <string name="scoreboard_main_menu_button">Main menu</string>
+    <string name="scoreboard_play_again_button">Play again</string>
+    <string name="menu_title">Menu</string>
+    <string name="points_text">POINTS</string>
+    <string name="app_title">KIMA!</string>
+    <string name="btn_start_game">Start game</string>
+    <string name="btn_rule_text">Rules</string>
+    <string name="btn_close_scoreboard">Close</string>
+    <string name="btn_you_won_tricks_dialog">YOU WON!</string>
+    <string name="btn_next_trick_dialog">Next trick</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="rules_dialog_into_text">Grundregler
 
 Spelets gång
@@ -29,12 +47,4 @@ Genom att se de andras kort avgör spelaren då om denne tror att det egna korte
 Ingen spelare tittar på något kort och alla chansar på 0 eller 1 stick.
 
 I slutet räknas samtliga poäng och den spelare med flest poäng vinner.</string>
-    <string name="rules_dialog_close_btn_text">Stäng</string>
-    <string name="btn_place_card_text">Lägg</string>
-    <string name="scoreboard_title">Scoreboard</string>
-    <string name="scoreboard_round">Round</string>
-    <string name="scoreboard_you">You</string>
-    <string name="scoreboard_cpu">CPU</string>
-    <string name="scoreboard_main_menu_button">Main menu</string>
-    <string name="scoreboard_play_again_button">Play again</string>
 </resources>

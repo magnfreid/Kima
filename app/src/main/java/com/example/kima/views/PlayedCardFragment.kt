@@ -10,18 +10,13 @@ import com.example.kima.R
 import com.example.kima.databinding.FragmentPlayedCardBinding
 import com.example.kima.viewmodel.GameViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-
 /**
- * A simple [Fragment] subclass.
- * Use the [PlayedCardFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Displays the card played by the player.
  */
 class PlayedCardFragment : Fragment() {
     private lateinit var binding: FragmentPlayedCardBinding
-    lateinit var vm: GameViewModel
+    private lateinit var vm: GameViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +31,7 @@ class PlayedCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         vm.player.observe(viewLifecycleOwner) {
 
-            binding.ivPlayedCard.setImageResource(it.playedCard?.id ?: R.drawable.ace_spades) //TODO Byt ut Ace of Spades mot baksidan av kort
+            binding.ivPlayedCard.setImageResource(it.playedCard?.id ?: R.drawable.back_of_card)
         }
 
     }

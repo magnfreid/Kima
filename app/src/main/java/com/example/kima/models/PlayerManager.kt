@@ -25,14 +25,14 @@ class PlayerManager {
         }
     }
 
-    fun updateUserPlayedCard(card: Card) {
+    fun updatePlayerPlayedCard(card: Card) {
         _player.value?.let {
             it.playedCard = card
             _player.value = it
         }
     }
 
-    fun removePlayedCard(card: Card) {
+    fun removePlayerCardFromHand(card: Card) {
         _player.value?.let {
             it.hand?.remove(card)
             _player.value = it
@@ -63,6 +63,11 @@ class PlayerManager {
         return randomCard
     }
 
+    /**
+     * Logic for when computer reacts to the player's placed card. Ensures following suit when possible
+     * and places the card with the lowest rank if the suit in play is missing from computer's hand.
+     * @return Returns the best card from the computer's hand.
+     */
     fun drawComputerReactiveCard(): Card {
         val computerHand = _computer.value?.hand ?: mutableListOf()
         val tempHand = mutableListOf<Card>()
@@ -91,6 +96,10 @@ class PlayerManager {
         return pickedCard
     }
 
+    /**
+     * Ensures that the player has to follow suit when possible when trying to place a card.
+     * @return Returns true if the selected card is viable for play.
+     */
     fun checkCardPlacementViability(card: Card): Boolean {
         val computerPlayedCard = _computer.value?.playedCard
         Log.d("SOUT", "Computer played card: $computerPlayedCard")

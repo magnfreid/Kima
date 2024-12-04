@@ -2,17 +2,14 @@ package com.example.kima.views
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.kima.R
 import com.example.kima.viewmodel.GameViewModel
@@ -21,8 +18,8 @@ import com.example.kima.models.Card
 
 
 class GameActivity : AppCompatActivity() {
-    lateinit var binding: ActivityGameBinding
-    lateinit var vm: GameViewModel
+    private lateinit var binding: ActivityGameBinding
+    private lateinit var vm: GameViewModel
     private val playedCardFragment: Fragment = PlayedCardFragment()
     private val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         showFragment(playedCardFragment)
@@ -43,6 +40,7 @@ class GameActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        //TODO Ta bort pga deprecated?
         window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -51,8 +49,8 @@ class GameActivity : AppCompatActivity() {
             v.setBackgroundColor(Color.BLACK)
             insets
         }
-        vm.player.observe(this){
-            if(it.hand == null) {
+        vm.player.observe(this) {
+            if (it.hand == null) {
                 vm.dealPlayerHand()
                 vm.dealComputerHand()
             }
@@ -67,11 +65,13 @@ class GameActivity : AppCompatActivity() {
         val tvCpuPoints = binding.tvPointCounterCPU
         val tvUserPoints = binding.tvPointCounterUser
 
-        vm.computer.observe(this){ score ->
-            tvCpuPoints.text = "${score.score} POINTS"
+        vm.computer.observe(this) { score ->
+            val textString = "${score.score} POINTS"
+            tvCpuPoints.text = textString
         }
-        vm.player.observe(this){ score ->
-            tvUserPoints.text = "${score.score} POINTS"
+        vm.player.observe(this) { score ->
+            val textString = "${score.score} POINTS"
+            tvUserPoints.text = textString
         }
 
     }
@@ -93,6 +93,7 @@ class GameActivity : AppCompatActivity() {
                     val dialogFragment = RulesDialogFragment()
                     dialogFragment.show(supportFragmentManager, "Test")
                 }
+
                 "Exit" -> {
                     // Avsluta spelet
                     finish()
@@ -103,7 +104,7 @@ class GameActivity : AppCompatActivity() {
     }
 
 
-    fun showFragment(fragment: Fragment) {
+    private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(binding.fcvPlayer.id, fragment)
             commit()
@@ -114,12 +115,7 @@ class GameActivity : AppCompatActivity() {
         binding.presentComputerCard.setImageResource(card.id)
     }
 
-    fun drawRandomComputerCard(): Card {
-        val card = vm.randomiseComputerCard()
-        return card
-    }
-
-    fun drawReactiveComputerCard(): Card {
+    private fun drawReactiveComputerCard(): Card {
         val card = vm.computerReactiveCardPick()
         return card
     }
@@ -128,7 +124,7 @@ class GameActivity : AppCompatActivity() {
         showFragment(handOfCardsFragment)
     }
 
-    fun showScoreboard(){
+    fun showScoreboard() {
         ScoreboardDialogFragment().show(supportFragmentManager, "Scoreboard")
     }
 }
