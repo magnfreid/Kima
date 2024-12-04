@@ -55,7 +55,7 @@ class TrickDialogFragment : DialogFragment() {
                 btnNextTrick.setOnClickListener {
                     val gameActivity = (activity as? GameActivity)
                     if (vm.gameRules.winner == vm.computer.value) {
-                        gameActivity?.displayComputerCard()
+                        gameActivity?.displayComputerCard(vm.randomiseComputerCard())
                     } else {
                         gameActivity?.setBackOfCardToComputerCard()
                     }

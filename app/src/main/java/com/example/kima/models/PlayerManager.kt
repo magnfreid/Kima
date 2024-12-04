@@ -52,7 +52,7 @@ class PlayerManager {
         }
     }
 
-    fun randomiseComputerCard(): Card {
+    fun drawComputerRandomCard(): Card {
         val currentComputerHand = _computer.value?.hand ?: mutableListOf()
         val randomIndex = (0 until currentComputerHand.size).random()
         val randomCard = currentComputerHand[randomIndex]
@@ -60,6 +60,34 @@ class PlayerManager {
         _computer.value?.hand = currentComputerHand
         _computer.value?.playedCard = randomCard
         return randomCard
+    }
+
+    fun drawComputerReactiveCard(): Card {
+        val computerHand = _computer.value?.hand ?: mutableListOf()
+        val tempHand = mutableListOf<Card>()
+        var pickedCard: Card
+        for (card in computerHand) {
+            if (card.suit == _player.value?.playedCard?.suit) {
+                tempHand.add(card)
+            }
+        }
+        tempHand.sortBy { it.rank }
+        if (tempHand.isNotEmpty()) {
+            pickedCard = tempHand[0]
+            for (card in tempHand) {
+                if (card.rank > _player.value?.playedCard?.rank!!) {
+                    pickedCard = card
+                    break
+                }
+            }
+        } else {
+            computerHand.sortBy { it.rank }
+            pickedCard = computerHand[0]
+
+        }
+        computerHand.remove(pickedCard)
+        _computer.value?.playedCard = pickedCard
+        return pickedCard
     }
 
 }

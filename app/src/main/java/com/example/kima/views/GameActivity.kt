@@ -27,8 +27,8 @@ class GameActivity : AppCompatActivity() {
     private val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         showFragment(playedCardFragment)
 
-        if (vm.gameRules.winner==vm.player.value) {
-            displayComputerCard()
+        if (vm.gameRules.winner == vm.player.value) {
+            displayComputerCard(drawReactiveComputerCard())
         }
 
         val trickDialogFragment = TrickDialogFragment()
@@ -110,13 +110,17 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    fun displayComputerCard() {
-        val card = drawComputerCard()
+    fun displayComputerCard(card: Card) {
         binding.presentComputerCard.setImageResource(card.id)
     }
 
-    fun drawComputerCard(): Card {
+    fun drawRandomComputerCard(): Card {
         val card = vm.randomiseComputerCard()
+        return card
+    }
+
+    fun drawReactiveComputerCard(): Card {
+        val card = vm.computerReactiveCardPick()
         return card
     }
 
