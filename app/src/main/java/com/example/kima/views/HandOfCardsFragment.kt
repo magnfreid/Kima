@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.kima.R
 import com.example.kima.databinding.FragmentHandOfCardsBinding
@@ -56,9 +57,8 @@ class HandOfCardsFragment(
         ivUserCard4 = view.findViewById(R.id.iv_user_card_4)
         ivUserCard5 = view.findViewById(R.id.iv_user_card_5)
 
-        vm.startNextTrick.observe(viewLifecycleOwner) {
-            startNextTrick ->
-            if(startNextTrick) {
+        vm.startNextTrick.observe(viewLifecycleOwner) { startNextTrick ->
+            if (startNextTrick) {
                 vm.startNextTrickConsumed()
                 Log.i("???", userHand.toString())
                 userHandView.clear() // Clear the list before adding ImageViews
@@ -78,14 +78,28 @@ class HandOfCardsFragment(
                             break
                         }
                     }
-                    if(chosenCard != null) {
-                        vm.updatePlayerCard(chosenCard!!)
-                        parentLayoutForHand.removeView(userHandView[userHand.indexOf(chosenCard)])
-//                        userHandView.remove(userHandView[userHand.indexOf(chosenCard)])
-//                        userHand.remove(chosenCard)
-                        vm.removePlayedCard(chosenCard!!)
-                        onShowPlayedHand()
-                        Log.i("BBB", userHand.toString())
+                    if (chosenCard != null) {
+                        var viableCardPlacement = true
+                        vm.computer.observe(viewLifecycleOwner) {
+                            if (vm.gameRules.winner == it) {
+                                Log.d("SOUT", "Computer is winner observed.")
+                                viableCardPlacement = vm.checkCardPlacementViability(chosenCard!!)
+                                Log.d("SOUT", "Viability set to: $viableCardPlacement")
+                            }
+                        }
+                        if (viableCardPlacement) {
+                            vm.updatePlayerCard(chosenCard!!)
+                            parentLayoutForHand.removeView(userHandView[userHand.indexOf(chosenCard)])
+                            vm.removePlayedCard(chosenCard!!)
+                            onShowPlayedHand()
+                            Log.i("BBB", userHand.toString())
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "You need to follow the suit when possible!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                 }
@@ -113,7 +127,7 @@ class HandOfCardsFragment(
                     userHand[currentIndex].isRaised = false
                     raisedCardIndex = -1
                 } else {
-                    if(raisedCardIndex != -1) {
+                    if (raisedCardIndex != -1) {
                         userHandView[raisedCardIndex].animate().translationY(0f).setDuration(150)
                         userHand[raisedCardIndex].isRaised = false
 
