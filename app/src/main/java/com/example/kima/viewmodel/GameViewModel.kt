@@ -102,6 +102,10 @@ class GameViewModel : ViewModel() {
         _startNextTrick.value = false // Reset the trigger
     }
 
+    fun checkCardPlacementViability(card: Card): Boolean {
+        return playerManager.checkCardPlacementViability(card)
+    }
+
 
 }
 
