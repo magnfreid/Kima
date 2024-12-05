@@ -18,6 +18,7 @@
     <string name="btn_rule_text">Rules</string>
     <string name="btn_close_scoreboard">Close</string>
     <string name="btn_you_won_tricks_dialog">YOU WON!</string>
+    <string name="btn_computer_won_tricks_dialog">COMPUTER WON!</string>
     <string name="btn_next_trick_dialog">Next trick</string>
 
     <!-- TODO: Remove or change this placeholder text -->

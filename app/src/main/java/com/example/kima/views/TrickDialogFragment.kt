@@ -49,7 +49,11 @@ class TrickDialogFragment : DialogFragment() {
         val tvDisplayTrickWinner = view.findViewById<MaterialTextView>(R.id.tv_display_trick_winner)
 
         val winner = vm.checkWinner()
-        val winnerString = "${winner?.name} won!"
+        val winnerString = if (winner == vm.player.value) {
+            getString(R.string.btn_you_won_tricks_dialog)
+        } else {
+            getString(R.string.btn_computer_won_tricks_dialog)
+        }
         tvDisplayTrickWinner.text = winnerString
         vm.resolveTurn()
 

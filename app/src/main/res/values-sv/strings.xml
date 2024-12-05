@@ -17,6 +17,7 @@
     <string name="btn_rule_text">Regler</string>
     <string name="btn_close_scoreboard">Stäng</string>
     <string name="btn_you_won_tricks_dialog">DU VANN!</string>
+    <string name="btn_computer_won_tricks_dialog">DATORN VANN!</string>
     <string name="btn_next_trick_dialog">Nästa stick</string>
 
     <!-- TODO: Remove or change this placeholder text -->
