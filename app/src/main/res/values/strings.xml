@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Kima</string>
+    <string name="app_name" translatable="false">Kima</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="rules_dialog_title">Rules:</string>
     <string name="rules_dialog_close_btn_text">Close</string>
     <string name="btn_place_card_text">Play card</string>
@@ -21,30 +21,28 @@
     <string name="btn_next_trick_dialog">Next trick</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="rules_dialog_into_text">Grundregler
+    <string name="rules_dialog_into_text">\n\n<b>Playing rules</b>
 
-Spelets gång
 
-Man måste alltid följa färg. Saknar man kort i den färg som lagts får man lägga vilket kort man vill.
-Om man misslyckas sätts det en så kallad “plump” i spelprotokollet, därav namnet på kortspelet.
-Att ta ett stick betyder att man har högsta kortet av de som är utlagda. Eller att man lagt en färg som ingen annan spelare har. Det är därför väldigt bra att ha många kort av samma kulör.
+\n\nBoth players start with five cards on their hand. You always get to play the first card, then the computer will try to play a better card than the one you played.
 
-1 kort
+\n\nThe players always need to follow suit. If there are no cards of the same suit as the played card, any card may be played. The idea of the game is to take more tricks than the opponent.
 
-Första omgången får alla spelare 10 kort vardera. Därefter börjar spelarna (medsols) att gissa hur många stick dessa tror att de kommer ta under denna spelrunda. Man får tippa på allt mellan 10 och 0 stick.
-Antalet förutspådda stick får aldrig gå jämnt ut på spelprotokollet. Sista spelaren kan alltså inte alltid välja det han vill. (EX om 3 spelare: Spelare 1 tippar på 5 stick, spelare 2 på 5 stick, spelare 3 får ej välja 0 stick)
-Efter att rundan spelats klart tittar man vilka som lyckats ta exakt så många stick de förutspått.
-Om en spelare lyckats får denne en etta framför antalet stick. Se protokoll längst ner på sidan.
+\n\nTaking a trick means that you have the highest ranking cards of the two played cards. Or, that the first played card is of a suit than the other player does not have. Therefore, it is advantageous to have many cards of the same suit.
 
-Spelrundorna fortsätter nu med ett färre kort per gång, enligt spelprotokollet.
+\n\nThe player who won the trick begins the next trick by playing a card.
 
-Vinnare
+\n\nIn the end, the points are counted and the player with the most points wins.
 
-När det är dags för en omgång med endast ett kort per person finns det flera olika varianter.
-Var spelare får titta på sitt kort och avgöra om det ger vinst eller ej (0 eller 1 stick).
-Var spelare håller upp kortet i pannan, utan att titta på det själv.
-Genom att se de andras kort avgör spelaren då om denne tror att det egna kortet är bättre eller sämre.
-Ingen spelare tittar på något kort och alla chansar på 0 eller 1 stick.
+\n\n\n\n
 
-I slutet räknas samtliga poäng och den spelare med flest poäng vinner.</string>
+<b>Game example:</b>\n\n
+
+- You being and play the 6 of spades.\n
+- The computer has no spades and therefore plays the 3 of diamonds.\n
+- You take the trick, receives one poing and gets to start the next trick.\n
+- You play the jack of diamonds.\n
+- The computer plays the queen of diamonds. This card follows suit and as a higher rank.\n
+- The computer takes the trick, receives one point and begins the next trick.\n
+- The same procedure is repeated for all 5 cards on the hand.</string>
 </resources>
