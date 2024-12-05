@@ -64,13 +64,14 @@ class GameActivity : AppCompatActivity() {
 
         val tvCpuPoints = binding.tvPointCounterCPU
         val tvUserPoints = binding.tvPointCounterUser
+        val pointString = getString(R.string.points_text)
 
         vm.computer.observe(this) { score ->
-            val textString = "${score.score} POINTS"
+            val textString = "${score.score} $pointString"
             tvCpuPoints.text = textString
         }
         vm.player.observe(this) { score ->
-            val textString = "${score.score} POINTS"
+            val textString = "${score.score} $pointString"
             tvUserPoints.text = textString
         }
 
