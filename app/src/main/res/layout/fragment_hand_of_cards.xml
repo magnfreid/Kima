@@ -8,27 +8,13 @@
     android:id="@+id/layout_for_hand"
     tools:context=".views.HandOfCardsFragment">
 
-<!--    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_hand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btn_place_card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/list_item_card" />-->
-
-
-
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_place_card"
+        style="@style/BtnKIMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/white"
-        android:textColor="#562435"
         android:textSize="20sp"
         android:text="@string/btn_place_card_text"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -92,81 +78,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         tools:srcCompat="@tools:sample/avatars" />
-
-
-
-    <!--<ImageView
-        android:id="@+id/iv_user_card_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_user_card_2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:src="@tools:sample/avatars" />
-
-
-
-    <ImageView
-        android:id="@+id/iv_user_card_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_user_card_3"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toEndOf="@+id/iv_user_card_1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:src="@tools:sample/avatars" />
-
-
-
-    <ImageView
-        android:id="@+id/iv_user_card_3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_user_card_4"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@+id/iv_user_card_2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:src="@tools:sample/avatars" />
-
-
-
-    <ImageView
-        android:id="@+id/iv_user_card_4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_user_card_5"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toEndOf="@+id/iv_user_card_3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:src="@tools:sample/avatars" />
-
-
-
-    <ImageView
-        android:id="@+id/iv_user_card_5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/iv_user_card_4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        tools:src="@tools:sample/avatars" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

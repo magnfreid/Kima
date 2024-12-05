@@ -18,6 +18,9 @@ import com.example.kima.viewmodel.GameViewModel
 import com.example.kima.databinding.DialogScoreboardBinding
 import com.google.android.material.textview.MaterialTextView
 
+/**
+ * A popup displaying the scoreboard.
+ */
 class ScoreboardDialogFragment : DialogFragment() {
     private lateinit var binding: DialogScoreboardBinding
     private lateinit var vm: GameViewModel

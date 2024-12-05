@@ -28,10 +28,10 @@ class GameViewModel : ViewModel() {
     val player: LiveData<Player> get() = playerManager.player
     val computer: LiveData<Player> get() = playerManager.computer
 
-    val scoreBoardCollection: LiveData<MutableList<Scoreboard.ScoreboardRow>> get() = scoreboard.scoreBoardScoreCollection
+    val scoreBoardCollection: LiveData<MutableList<Scoreboard.ScoreboardRow>> get() = scoreboard.scoreboardScoreCollection
 
     // Livedata for triggering the next trick in the HandOfCardsFragment.
-    val _startNextTrick = MutableLiveData<Boolean>(true)
+    private val _startNextTrick = MutableLiveData(true)
     val startNextTrick: LiveData<Boolean> get() = _startNextTrick
 
     // LiveData for updating the back-of-card image for computer's played card spot.
@@ -52,7 +52,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun updatePlayerCard(card: Card) {
-        playerManager.updateUserPlayedCard(card)
+        playerManager.updatePlayerPlayedCard(card)
     }
 
     fun checkWinner(): Player? {
@@ -64,9 +64,12 @@ class GameViewModel : ViewModel() {
     }
 
     fun removePlayedCard(card: Card) {
-        playerManager.removePlayedCard(card)
+        playerManager.removePlayerCardFromHand(card)
     }
 
+    /**
+     * Updates the winner's score and adds the resolved round's scores to the scoreboard.
+     */
     private fun onResolveTurn(winner: Player?) {
         if (winner == player.value) {
             playerManager.incrementPlayerScore()

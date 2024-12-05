@@ -12,6 +12,10 @@ class GameRules(
     private var activePlayer = player
     var winner: Player? = player
 
+    /**
+     * Checks which player has won a round. Sets the starting player for next round to the winner.
+     * @return Returns the winner.
+     */
     fun checkWinner(): Player? {
         winner = activePlayer
         val reactivePlayer = if (activePlayer == player) computer else player
@@ -26,6 +30,9 @@ class GameRules(
         return winner
     }
 
+    /**
+     * Used for resolving each round after a winner is determined.
+     */
     fun resolveTurn() {
         onResolveTurn(winner)
     }
