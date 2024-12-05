@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:backgroundTint="#568058"
+    android:backgroundTint="#242624"
     android:orientation="vertical"
     app:cardCornerRadius="15dp">
 
@@ -30,9 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="#B7D3B9"
+            android:backgroundTint="#C8D1C8"
             android:text="@string/btn_next_trick_dialog"
-            android:textColor="#355B37"
+            android:textColor="#313531"
             android:textSize="20sp" />
 
     </LinearLayout>

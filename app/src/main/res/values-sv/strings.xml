@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="rules_dialog_title">Regler:</string>
+    <string name="rules_dialog_close_btn_text">Stäng</string>
+    <string name="btn_place_card_text">Spela kort</string>
+    <string name="scoreboard_title">Resultattavla</string>
+    <string name="scoreboard_round">Runda</string>
+    <string name="scoreboard_you">Du</string>
+    <string name="scoreboard_cpu">Dator</string>
+    <string name="scoreboard_main_menu_button">Huvudmeny</string>
+    <string name="scoreboard_play_again_button">Spela igen</string>
+    <string name="menu_title">Meny</string>
+    <string name="points_text">POÄNG</string>
+    <string name="app_title">KIMA!</string>
+    <string name="btn_start_game">Starta spel</string>
+    <string name="btn_rule_text">Regler</string>
+    <string name="btn_close_scoreboard">Stäng</string>
+    <string name="btn_you_won_tricks_dialog">DU VANN!</string>
+    <string name="btn_next_trick_dialog">Nästa stick</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="rules_dialog_into_text">\n\n<b>Grundregler</b>
+
+\n\n
+
+Båda spelarna startar med fem kort på handen. Du får alltid börja spela ut det första kortet, därefter ska datorn försöka spela ett bättre kort än vad du spelat.
+
+\n\nSpelarna måste alltid följa färg. Saknas kort i den färg som lagts får vilket kort som helst läggas.Spelet går ut på att ta fler stick än motståndaren.
+
+\n\nAtt ta ett stick betyder att man har högsta kortet av de som är utlagda. Eller att man lagt en färg som ingen annan spelare har. Det är därför väldigt bra att ha många kort av samma kulör.
+
+\n\nDen som har vunnit ett stick startar nästa stick med att lägga ut ett kort.
+
+\n\nI slutet räknas samtliga poäng och den spelare med flest poäng vinner.
+\n\n\n\n
+
+<b>Spelexempel:</b>\n\n
+
+- Du börjar och lägger ut en spader 6.\n
+- Datorn har inga spader och lägger därför ut en ruter 3.\n
+- Du vinner sticket, får ett poäng och får starta nästa stickomgång.\n
+- Du lägger ruter knekt.\n
+- Datorn lägger ruter dam. Detta kort följer färg och har högre valör.\n
+- Datorn vinner sticket, får ett poäng och startar nästa stickomgång.\n
+- Samma procedur upprepas för samtliga 5 kort på handen. </string>
+</resources>
