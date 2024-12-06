@@ -64,7 +64,8 @@ class TrickDialogFragment : DialogFragment() {
                     if (vm.gameRules.winner == vm.computer.value) {
                         gameActivity?.displayComputerCard(vm.randomiseComputerCard())
                     } else {
-                        gameActivity?.setBackOfCardToComputerCard()
+                        gameActivity?.revertToComputerCardHolder()
+
                     }
                     vm.resetTrick()
                     (activity as? GameActivity)?.showHandOfCards()
@@ -72,9 +73,9 @@ class TrickDialogFragment : DialogFragment() {
                     dialog?.dismiss()
                 }
             } else {
-                val winnerText = "Game over!"
+                val winnerText = getString(R.string.scoreboard_game_over)
                 tvDisplayTrickWinner.text = winnerText
-                val btnText = "Show scoreboard"
+                val btnText = getString(R.string.scoreboard_show)
                 btnNextTrick.text = btnText
                 btnNextTrick.setOnClickListener {
                     (activity as? GameActivity)?.showScoreboard()

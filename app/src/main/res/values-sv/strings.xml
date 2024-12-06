@@ -8,6 +8,8 @@
     <string name="scoreboard_round">Runda</string>
     <string name="scoreboard_you">Du</string>
     <string name="scoreboard_cpu">Dator</string>
+    <string name="scoreboard_game_over">Spelet är slut!</string>
+    <string name="scoreboard_show">Visa resultattavla</string>
     <string name="scoreboard_main_menu_button">Huvudmeny</string>
     <string name="scoreboard_play_again_button">Spela igen</string>
     <string name="menu_title">Meny</string>
@@ -19,6 +21,7 @@
     <string name="btn_you_won_tricks_dialog">DU VANN!</string>
     <string name="btn_computer_won_tricks_dialog">DATORN VANN!</string>
     <string name="btn_next_trick_dialog">Nästa stick</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="rules_dialog_into_text">\n\n<b>Grundregler</b>

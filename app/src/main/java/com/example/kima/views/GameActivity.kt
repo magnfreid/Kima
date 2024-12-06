@@ -56,7 +56,6 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        setBackOfCardToComputerCard()
 
         showFragment(handOfCardsFragment)
 
@@ -77,8 +76,10 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    fun setBackOfCardToComputerCard() {
-        binding.presentComputerCard.setImageResource(R.drawable.back_of_card)
+
+    fun revertToComputerCardHolder() {
+        val ivCardholder = binding.presentComputerCard
+        ivCardholder.setImageDrawable(null)
     }
 
     private fun setupMenu() {
