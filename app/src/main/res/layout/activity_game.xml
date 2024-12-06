@@ -37,7 +37,6 @@
             android:id="@+id/tv_point_counter_CPU"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="POINTS"
             android:textColor="@color/white"
             android:layout_gravity="end"
             android:layout_marginEnd="5dp"
