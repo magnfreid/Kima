@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -21,6 +20,8 @@ class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     private lateinit var vm: GameViewModel
     private val playedCardFragment: Fragment = PlayedCardFragment()
+
+    // Fragment as class variable with call back function.
     private val handOfCardsFragment: HandOfCardsFragment = HandOfCardsFragment {
         showFragment(playedCardFragment)
 
@@ -40,22 +41,21 @@ class GameActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        //TODO Ta bort pga deprecated?
-        window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            // Set top are of phone to black.
             v.setBackgroundColor(Color.BLACK)
             insets
         }
+
+        // Deal hands to user and computer.
         vm.player.observe(this) {
             if (it.hand == null) {
                 vm.dealPlayerHand()
                 vm.dealComputerHand()
             }
         }
-
 
         showFragment(handOfCardsFragment)
 
@@ -65,6 +65,7 @@ class GameActivity : AppCompatActivity() {
         val tvUserPoints = binding.tvPointCounterUser
         val pointString = getString(R.string.points_text)
 
+        // Observe points and update text views.
         vm.computer.observe(this) { score ->
             val textString = "${score.score} $pointString"
             tvCpuPoints.text = textString
@@ -76,7 +77,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-
+// ----------------------------FUNCTIONS------------------------------------------------------------
     fun revertToComputerCardHolder() {
         val ivCardholder = binding.presentComputerCard
         ivCardholder.setImageDrawable(null)

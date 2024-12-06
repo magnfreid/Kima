@@ -42,10 +42,11 @@ class ScoreboardDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val grid = binding.gridScoreboard
-        var row = 1
+        var row = 1 // 0 is title row in the xml-file.
+
+        // Instead of having a great deal of textviews in the xml-file to access.
         vm.scoreBoardCollection.observe(viewLifecycleOwner) {
-            Log.d("SOUT", "From observer: $it")
-            for (scoresRow in it) {
+            for (scoresRow in it) { // Adds a row of text views for every trick played. Three different columns.
                 grid.addView(
                     customTextView(
                         requireContext(), scoresRow.round.toString(), 0, row, false
@@ -65,12 +66,10 @@ class ScoreboardDialogFragment : DialogFragment() {
             }
         }
         vm.player.observe(viewLifecycleOwner) {
-            Log.d("SOUT", "${it.score} observed.")
             grid.addView(customTextView(requireContext(), "Total", 0, row, true))
             grid.addView(customTextView(requireContext(), it.score.toString(), 1, row, true))
         }
         vm.computer.observe(viewLifecycleOwner) {
-            Log.d("SOUT", "${it.score} observed.")
             grid.addView(customTextView(requireContext(), it.score.toString(), 2, row, true))
         }
 
@@ -82,6 +81,7 @@ class ScoreboardDialogFragment : DialogFragment() {
     private fun customTextView(
         context: Context, textString: String, column: Int, row: Int, bold: Boolean
     ): MaterialTextView {
+        // Layout code for the scoreboard.
         val textView = MaterialTextView(ContextThemeWrapper(context, R.style.TVScoreboard)).apply {
             text = textString
             if (bold) setTypeface(null, Typeface.BOLD)
@@ -94,7 +94,6 @@ class ScoreboardDialogFragment : DialogFragment() {
                 (this as ViewGroup.MarginLayoutParams).setMargins(1, 1, 1, 1)
             }
         }
-        Log.d("SOUT", "Textview created!")
         return textView
     }
 

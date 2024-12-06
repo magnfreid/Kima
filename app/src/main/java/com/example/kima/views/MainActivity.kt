@@ -21,10 +21,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        // Start game button.
         binding.btnStart.setOnClickListener{
             val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
         }
+        // Show rules button.
         binding.btnRules.setOnClickListener{
             val dialogFragment = RulesDialogFragment()
             dialogFragment.show(supportFragmentManager, "Rules")
