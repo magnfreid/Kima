@@ -21,9 +21,11 @@
     <string name="btn_you_won_tricks_dialog">DU VANN!</string>
     <string name="btn_computer_won_tricks_dialog">DATORN VANN!</string>
     <string name="btn_next_trick_dialog">Nästa stick</string>
+    <string name="computer_s_card">Datorns kort</string>
+    <string name="rules_card_image">Illustrativt kort</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="rules_dialog_into_text">\n\n<b>Grundregler</b>
 
 \n\n
@@ -48,4 +50,6 @@ Båda spelarna startar med fem kort på handen. Du får alltid börja spela ut d
 - Datorn lägger ruter dam. Detta kort följer färg och har högre valör.\n
 - Datorn vinner sticket, får ett poäng och startar nästa stickomgång.\n
 - Samma procedur upprepas för samtliga 5 kort på handen. </string>
+
+
 </resources>

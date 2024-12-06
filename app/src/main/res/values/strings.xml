@@ -22,6 +22,8 @@
     <string name="btn_you_won_tricks_dialog">YOU WON!</string>
     <string name="btn_computer_won_tricks_dialog">COMPUTER WON!</string>
     <string name="btn_next_trick_dialog">Next trick</string>
+    <string name="computer_s_card">Computer\'s card</string>
+    <string name="rules_card_image">Illustrative card</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -49,4 +51,5 @@
 - The computer plays the queen of diamonds. This card follows suit and as a higher rank.\n
 - The computer takes the trick, receives one point and begins the next trick.\n
 - The same procedure is repeated for all 5 cards on the hand.</string>
+
 </resources>
