@@ -1,7 +1,7 @@
 package com.example.kima.views
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +18,8 @@ import com.example.kima.viewmodel.GameViewModel
  * Displays the player's hand of cards and a play card button.
  */
 class HandOfCardsFragment(
-    val onShowPlayedHand: () -> Unit
+    // Call back function used in GameActivity for place card button.
+    val onPressPlaceCardBtn: () -> Unit
 ) : Fragment() {
     private val userHandView: MutableList<ImageView> = mutableListOf()
     private lateinit var binding: FragmentHandOfCardsBinding
@@ -55,58 +56,52 @@ class HandOfCardsFragment(
         ivUserCard4 = view.findViewById(R.id.iv_user_card_4)
         ivUserCard5 = view.findViewById(R.id.iv_user_card_5)
 
-        vm.startNextTrick.observe(viewLifecycleOwner) { startNextTrick ->
-            if (startNextTrick) {
-                vm.startNextTrickConsumed()
-                Log.i("???", userHand.toString())
-                userHandView.clear() // Clear the list before adding ImageViews
-                Log.i("!!!", userHand.toString())
+// ---------------------------Trick rounds.---------------------------------------------------------
+        userHandView.clear() // Clear the list before adding ImageViews
 
-                vm.player.observe(viewLifecycleOwner) {
-                    userHand = it.hand ?: mutableListOf()
-                    setUpImageViewsForUserHand()
-                    displayUserHand(userHandView, userHand)
-                    Log.i("AAA", userHand.toString())
+        vm.player.observe(viewLifecycleOwner) {
+            userHand = it.hand ?: mutableListOf()
+            setUpImageViewsForUserHand()
+            displayUserHand(userHandView, userHand)
+        }
+
+        binding.btnPlaceCard.setOnClickListener {
+            for (card in userHand) {
+                if (card.isRaised) {
+                    chosenCard = card
+                    break
                 }
-
-                binding.btnPlaceCard.setOnClickListener {
-                    for (card in userHand) {
-                        if (card.isRaised) {
-                            chosenCard = card
-                            break
-                        }
+            }
+            if (chosenCard != null) {
+                var viableCardPlacement = true
+                vm.computer.observe(viewLifecycleOwner) {
+                    if (vm.gameRules.winner == it) {
+                        viableCardPlacement = vm.checkCardPlacementViability(chosenCard!!)
                     }
-                    if (chosenCard != null) {
-                        var viableCardPlacement = true
-                        vm.computer.observe(viewLifecycleOwner) {
-                            if (vm.gameRules.winner == it) {
-                                Log.d("SOUT", "Computer is winner observed.")
-                                viableCardPlacement = vm.checkCardPlacementViability(chosenCard!!)
-                                Log.d("SOUT", "Viability set to: $viableCardPlacement")
-                            }
-                        }
-                        if (viableCardPlacement) {
-                            vm.updatePlayerCard(chosenCard!!)
-                            parentLayoutForHand.removeView(userHandView[userHand.indexOf(chosenCard)])
-                            vm.removePlayedCard(chosenCard!!)
-                            onShowPlayedHand()
-                            Log.i("BBB", userHand.toString())
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "You need to follow the suit when possible!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                }
+                if (viableCardPlacement) {
+                    vm.updatePlayerCard(chosenCard!!)
+                    parentLayoutForHand.removeView(userHandView[userHand.indexOf(chosenCard)])
+                    vm.removePlayedCard(chosenCard!!)
+                    onPressPlaceCardBtn()
+                } else {
+                    val toast = Toast.makeText(
+                        context,
+                        "You need to follow suit when possible!",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.apply{
+                        setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
                     }
-
                 }
             }
         }
-
-
     }
+//--------------------------------------------------------------------------------------------------
 
+
+// ----------------------------FUNCTIONS------------------------------------------------------------
     private fun setUpImageViewsForUserHand() {
         userHandView.add(ivUserCard1)
         userHandView.add(ivUserCard2)

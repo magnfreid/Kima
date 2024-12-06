@@ -1,6 +1,5 @@
 package com.example.kima.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,13 +29,10 @@ class GameViewModel : ViewModel() {
 
     val scoreBoardCollection: LiveData<MutableList<Scoreboard.ScoreboardRow>> get() = scoreboard.scoreboardScoreCollection
 
-    // Livedata for triggering the next trick in the HandOfCardsFragment.
-    private val _startNextTrick = MutableLiveData(true)
-    val startNextTrick: LiveData<Boolean> get() = _startNextTrick
-
     // LiveData for updating the back-of-card image for computer's played card spot.
     val imageChangeEvent = MutableLiveData<Boolean>()
 
+    // LiveData to govern the trick rounds.
     val trickCounter = MutableLiveData(0)
 
 
@@ -81,7 +77,6 @@ class GameViewModel : ViewModel() {
         val computerScore = if (winner == computer.value) 1 else 0
         val round = 5 - player.value?.hand!!.size
         scoreboard.addScoreboardRow(round, playerScore, computerScore)
-        Log.d("SOUT", "${scoreBoardCollection.value}")
     }
 
     fun randomiseComputerCard(): Card {
@@ -92,17 +87,8 @@ class GameViewModel : ViewModel() {
         return playerManager.drawComputerReactiveCard()
     }
 
-    fun resetTrick() {
+    fun incrementTricks() {
         trickCounter.value = trickCounter.value!! + 1
-        if (trickCounter.value!! < 5) {
-            _startNextTrick.value = true
-        } else {
-            // TODO: End game logic!
-        }
-    }
-
-    fun startNextTrickConsumed() {
-        _startNextTrick.value = false // Reset the trigger
     }
 
     fun checkCardPlacementViability(card: Card): Boolean {

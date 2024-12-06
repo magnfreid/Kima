@@ -29,8 +29,9 @@ class PlayedCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm.player.observe(viewLifecycleOwner) {
 
+        // Observe the played card and update the image.
+        vm.player.observe(viewLifecycleOwner) {
             binding.ivPlayedCard.setImageResource(it.playedCard?.id ?: R.drawable.back_of_card)
         }
 

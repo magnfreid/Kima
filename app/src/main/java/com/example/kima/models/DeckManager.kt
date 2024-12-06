@@ -32,6 +32,7 @@ class DeckManager {
     private fun generateDeck(): MutableList<Card> {
         val deck = mutableListOf<Card>()
         //        CLUBS
+        deck.add(Card(CLUBS, 2, R.drawable.clubs_2))
         deck.add(Card(CLUBS, 3, R.drawable.clubs_3))
         deck.add(Card(CLUBS, 4, R.drawable.clubs_4))
         deck.add(Card(CLUBS, 5, R.drawable.clubs_5))
@@ -46,6 +47,7 @@ class DeckManager {
         deck.add(Card(CLUBS, 14, R.drawable.clubs_ace))
 
 //        DIAMONDS
+        deck.add(Card(DIAMONDS, 2, R.drawable.diamonds_2))
         deck.add(Card(DIAMONDS, 3, R.drawable.diamonds_3))
         deck.add(Card(DIAMONDS, 4, R.drawable.diamonds_4))
         deck.add(Card(DIAMONDS, 5, R.drawable.diamonds_5))
@@ -60,6 +62,7 @@ class DeckManager {
         deck.add(Card(DIAMONDS, 14, R.drawable.diamonds_ace))
 
 //        HEARTS
+        deck.add(Card(HEARTS, 2, R.drawable.hearts_2))
         deck.add(Card(HEARTS, 3, R.drawable.hearts_3))
         deck.add(Card(HEARTS, 4, R.drawable.hearts_4))
         deck.add(Card(HEARTS, 5, R.drawable.hearts_5))
@@ -74,6 +77,7 @@ class DeckManager {
         deck.add(Card(HEARTS, 14, R.drawable.hearts_ace))
 
 //        SPADES
+        deck.add(Card(SPADES, 2, R.drawable.spades_2))
         deck.add(Card(SPADES, 3, R.drawable.spades_3))
         deck.add(Card(SPADES, 4, R.drawable.spades_4))
         deck.add(Card(SPADES, 5, R.drawable.spades_5))

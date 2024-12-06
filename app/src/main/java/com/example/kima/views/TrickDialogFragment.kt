@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kima.R
@@ -39,6 +38,7 @@ class TrickDialogFragment : DialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
+        dialog.window?.setDimAmount(0.0f) // Remove blurred window behind dialog fragment.
         return dialog
     }
 
@@ -48,6 +48,8 @@ class TrickDialogFragment : DialogFragment() {
         val btnNextTrick = view.findViewById<MaterialButton>(R.id.btn_next_trick)
         val tvDisplayTrickWinner = view.findViewById<MaterialTextView>(R.id.tv_display_trick_winner)
 
+//----------------------- Check who wins the trick round. ----------------------------------------
+        // Check winner and set text.
         val winner = vm.checkWinner()
         val winnerString = if (winner == vm.player.value) {
             getString(R.string.btn_you_won_tricks_dialog)
@@ -55,26 +57,28 @@ class TrickDialogFragment : DialogFragment() {
             getString(R.string.btn_computer_won_tricks_dialog)
         }
         tvDisplayTrickWinner.text = winnerString
+        // Give points.
         vm.resolveTurn()
 
+        // Check how many tricks have been played.
         vm.trickCounter.observe(viewLifecycleOwner) {
-            if (it < 4) {
+            if (it < 4) { // All tricks but the last.
                 btnNextTrick.setOnClickListener {
                     val gameActivity = (activity as? GameActivity)
                     if (vm.gameRules.winner == vm.computer.value) {
                         gameActivity?.displayComputerCard(vm.randomiseComputerCard())
                     } else {
-                        gameActivity?.setBackOfCardToComputerCard()
+                        gameActivity?.revertToComputerCardHolder()
+
                     }
-                    vm.resetTrick()
+                    vm.incrementTricks()
                     (activity as? GameActivity)?.showHandOfCards()
                     vm.imageChangeEvent.value = true
                     dialog?.dismiss()
                 }
-            } else {
-                val winnerText = "Game over!"
-                tvDisplayTrickWinner.text = winnerText
-                val btnText = "Show scoreboard"
+            } else { // The last trick.
+                tvDisplayTrickWinner.text = winnerString
+                val btnText = getString(R.string.scoreboard_show)
                 btnNextTrick.text = btnText
                 btnNextTrick.setOnClickListener {
                     (activity as? GameActivity)?.showScoreboard()

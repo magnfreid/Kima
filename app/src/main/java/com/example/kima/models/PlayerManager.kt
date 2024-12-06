@@ -1,6 +1,5 @@
 package com.example.kima.models
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
@@ -10,6 +9,9 @@ class PlayerManager {
     val player: LiveData<Player> get() = _player
     private val _computer = MutableLiveData(Player("Computer"))
     val computer: LiveData<Player> get() = _computer
+
+
+//------------------------------FUNCTIONS---------------------------------------------------------//
 
     fun updatePlayerHand(newHand: MutableList<Card>) {
         _player.value?.let {
@@ -102,9 +104,7 @@ class PlayerManager {
      */
     fun checkCardPlacementViability(card: Card): Boolean {
         val computerPlayedCard = _computer.value?.playedCard
-        Log.d("SOUT", "Computer played card: $computerPlayedCard")
         val playerHand = _player.value?.hand ?: mutableListOf()
-        Log.d("SOUT", "Player hand: $playerHand")
         var viable = true
         for (cardOnHand in playerHand) {
             if (cardOnHand.suit == computerPlayedCard?.suit) {
@@ -112,7 +112,6 @@ class PlayerManager {
                 break
             }
         }
-        Log.d("SOUT", "Chosen card: $card")
         return if (!viable) {
             card.suit == computerPlayedCard?.suit
         } else true
